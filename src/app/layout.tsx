@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   description: "We help startups, businesses, and enterprises build custom software, websites, AI solutions, and scalable digital products that accelerate growth.",
 };
 
+import { LeadPopup } from "@/components/ui/LeadPopup";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,6 +36,7 @@ export default function RootLayout({
             </div>
             
             <Loader />
+            <LeadPopup />
             <Navbar />
             <main className="flex-1">{children}</main>
             <div className="px-4 md:px-8 pb-4 md:pb-8 mt-8">
