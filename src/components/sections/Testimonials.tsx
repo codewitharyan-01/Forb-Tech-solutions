@@ -32,7 +32,7 @@ export function Testimonials() {
             </div>
 
             <p className="text-lg md:text-xl font-medium leading-relaxed mb-8 relative z-10">
-              "{test.quote}"
+              &quot;{test.quote}&quot;
             </p>
             
             <div className="flex items-center gap-4 relative z-10">

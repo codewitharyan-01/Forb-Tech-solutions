@@ -1,173 +1,159 @@
 "use client";
 
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { TextReveal } from "@/components/ui/TextReveal";
 
 const projects = [
-  { name: "Fitness Platform", category: "Web App", url: "https://hardcore-nikol.vercel.app/", domain: "hardcore-nikol.vercel.app" },
+  { name: "Wispa AI", category: "Startup Prototype", url: "https://portfolio-by-aryan.netlify.app/", domain: "SSIP Phase 1" },
+  { name: "Smart City", category: "Civic Portal", url: "https://portfolio-by-aryan.netlify.app/", domain: "Award Winning" },
+  { name: "Life Fitness", category: "Web App", url: "https://hardcore-nikol.vercel.app/", domain: "Gym Management" },
   { name: "Culinary Hub", category: "Restaurant", url: "https://dev-munjani.github.io/Dev-s-Kitchen/", domain: "dev-s-kitchen.com" },
-  { name: "Bhavnagari Food", category: "Food Delivery", url: "https://buntykakabhavnagari.github.io/Banti-Kaka-Bhavnagari-Bateta-Bhungla/", domain: "bhavnagarifood.com" },
+  { name: "Bhavnagari", category: "Food Delivery", url: "https://buntykakabhavnagari.github.io/Banti-Kaka-Bhavnagari-Bateta-Bhungla/", domain: "bhavnagarifood.com" },
   { name: "Empire 799", category: "E-Commerce", url: "https://empire799.com/", domain: "empire799.com" },
-  { name: "Sanitary Wear", category: "Portfolio", url: "https://siddheswary-sanitary.vercel.app/", domain: "siddheswary-sanitary.vercel.app" },
   { name: "Anaya Dental", category: "Healthcare", url: "https://anaya-dental-care.vercel.app/", domain: "anaya-dental-care.vercel.app" },
-  { name: "Rajvi Khaman", category: "Branding", url: "https://codewitharyan-01.github.io/Rajvi_Khaman/", domain: "rajvi-khaman.com" },
-  { name: "Easyy Tools", category: "SaaS", url: "https://codewitharyan-01.github.io/easyytools.com/", domain: "easyytools.com" }
+  { name: "Rajvi Khaman", category: "Branding", url: "https://codewitharyan-01.github.io/Rajvi_Khaman/", domain: "rajvi-khaman.com" }
 ];
 
 export function FeaturedWork() {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  
+  // Track the scroll progress of the entire section
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
 
-  const stepsCount = Math.ceil(projects.length / 2);
-
   return (
-    // Reduced to 150vh to make scrolling through the section much faster on mobile
-    <section id="work" ref={containerRef} className="relative bg-background z-10" style={{ height: "150vh" }}>
-
-      {/* Make sticky container hug the content instead of taking the full screen */}
-      <div className="sticky top-[5vh] md:top-[10vh] w-full flex flex-col overflow-hidden pb-12 md:pb-24">
-
-        {/* Header - Flow normally on mobile, fixed absolute on desktop */}
-        <div className="w-full flex justify-center z-0 px-4 mb-6 md:absolute md:top-12 md:left-0 md:mb-0">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-6xl font-black tracking-tighter mb-1 md:mb-2 text-foreground">
-              <TextReveal>Selected Works.</TextReveal>
-            </h2>
-          </div>
+    <section 
+      id="work" 
+      ref={containerRef}
+      className="relative bg-background z-10"
+      style={{ height: "150vh" }} // Provides the scroll space needed to peel through all cards
+    >
+      <div className="sticky top-[7.5vh] h-[85vh] w-full flex flex-col justify-center overflow-hidden py-8 md:py-12">
+        
+        {/* The Card Stack */}
+        <div className="relative w-full max-w-[1400px] mx-auto h-[350px] md:h-[450px] px-4 md:px-12 perspective-1000">
+          {[ { isIntro: true, name: "Our Work" }, ...projects ].map((item, index, array) => {
+            return (
+              <StackCard 
+                key={index} 
+                item={item} 
+                index={index} 
+                totalCards={array.length} 
+                scrollYProgress={scrollYProgress} 
+              />
+            );
+          })}
         </div>
-
-        {/* Stacking Card Deck Container */}
-        <div className="relative w-full h-[450px] md:h-[350px] max-w-5xl mx-auto md:mt-32">
-          {Array.from({ length: stepsCount }).map((_, i) => (
-            <CardPair
-              key={i}
-              index={i}
-              stepsCount={stepsCount}
-              scrollYProgress={scrollYProgress}
-            />
-          ))}
-        </div>
-
       </div>
     </section>
   );
 }
 
-// Subcomponent that handles the math and rendering for a single overlapping layer
-function CardPair({
-  index,
-  stepsCount,
-  scrollYProgress
-}: {
-  index: number;
-  stepsCount: number;
-  scrollYProgress: MotionValue<number>;
+function StackCard({ 
+  item, 
+  index, 
+  totalCards, 
+  scrollYProgress 
+}: { 
+  item: {
+    isIntro?: boolean;
+    name?: string;
+    category?: string;
+    url?: string;
+    domain?: string;
+  }; 
+  index: number; 
+  totalCards: number; 
+  scrollYProgress: MotionValue<number>; 
 }) {
-  const leftProject = projects[index * 2];
-  const rightProject = projects[index * 2 + 1];
+  // Calculate the scroll window for this specific card
+  const step = 1 / totalCards;
+  const startAnim = index * step;
+  const endAnim = (index + 1) * step;
+  
+  const isLast = index === totalCards - 1;
 
-  // Calculate entry and exit intervals based on scroll progress
-  const interval = 1 / (stepsCount - 1); // 0.333 for 4 steps
+  // Card Y Position: Moves from resting staggered position to 0 (top of stack), then flies up
+  const yProgress = [0, Math.max(0.001, startAnim), endAnim];
+  const yValues = [index * 20, 0, isLast ? 0 : -1000];
+  const y = useTransform(scrollYProgress, yProgress, yValues);
 
-  const startEntry = (index - 1) * interval;
-  const endEntry = index * interval;
+  // Card Scale: Starts small, grows to 1 as it becomes the top card, stays 1 as it flies away
+  const scaleProgress = [0, Math.max(0.001, startAnim), endAnim];
+  const scaleValues = [1 - index * 0.05, 1, 1];
+  const scale = useTransform(scrollYProgress, scaleProgress, scaleValues);
 
-  const startExit = endEntry;
-  const endExit = (index + 1) * interval;
+  // Card Opacity: Fades in as it approaches top, fades out entirely as it flies away
+  const opacityProgress = [0, Math.max(0.001, startAnim), endAnim];
+  const opacityValues = [1 - index * 0.15, 1, isLast ? 1 : 0];
+  const opacity = useTransform(scrollYProgress, opacityProgress, opacityValues);
 
-  // Animate from bottom up, then stick. Index 0 is already stuck at 0.
-  // Using 150% ensures it comes from just below the card container
-  const y = useTransform(
-    scrollYProgress,
-    [startEntry, endEntry],
-    ["150%", "0%"]
-  );
+  if (item.isIntro) {
+    return (
+      <motion.div
+        style={{ y, scale, opacity, zIndex: totalCards - index }}
+        className="absolute top-0 left-4 right-4 md:left-12 md:right-12 h-full flex justify-center"
+      >
+        <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-8 bg-foreground text-background border border-foreground/10 rounded-[1.5rem] md:rounded-[2.5rem] shadow-2xl overflow-hidden relative group">
+          <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-transparent opacity-50" />
+          <h2 className="relative z-10 text-5xl md:text-7xl lg:text-9xl font-black uppercase tracking-tighter text-center">
+            Our Work
+          </h2>
+          <p className="relative z-10 mt-6 text-xs md:text-sm font-bold uppercase tracking-widest opacity-80 text-center animate-pulse">
+            Scroll to explore
+          </p>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
-      style={{
-        y: index === 0 ? "0vh" : y,
-        zIndex: index * 10
+      style={{ 
+        y, 
+        scale, 
+        opacity,
+        zIndex: totalCards - index 
       }}
-      className="absolute inset-0 w-full h-full flex flex-col md:flex-row gap-4 md:gap-6 px-4 md:px-8 origin-top"
+      className="absolute top-0 left-4 right-4 md:left-12 md:right-12 h-full flex justify-center"
     >
-      {/* Left Panel */}
-      {leftProject && (
-        <a
-          href={leftProject.url}
-          target="_blank"
-          rel="noreferrer"
-          className="w-full md:w-1/2 h-1/2 md:h-full bg-background border border-foreground/20 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 flex flex-col justify-between group hover:bg-foreground hover:text-background transition-colors duration-500 shadow-2xl relative overflow-hidden"
-        >
-          {/* Top Row */}
-          <div className="flex justify-between items-start relative z-10">
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest px-4 py-1.5 border border-current rounded-full opacity-60 group-hover:opacity-100">
-              {leftProject.category}
-            </span>
-            <span className="text-lg md:text-xl font-black opacity-20">0{index * 2 + 1}</span>
+      <a 
+        href={item.url}
+        target="_blank"
+        rel="noreferrer"
+        className="group relative w-full h-full flex flex-col justify-between p-6 md:p-8 bg-background border border-foreground/10 rounded-[1.5rem] md:rounded-[2.5rem] hover:border-foreground/30 transition-all duration-300 shadow-2xl overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        <div className="relative z-10 flex justify-between items-start w-full">
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-widest px-4 py-2 border border-foreground/20 rounded-full group-hover:bg-foreground group-hover:text-background transition-colors duration-300 bg-background/50 backdrop-blur-md">
+            {item.category}
+          </span>
+          <span className="text-2xl md:text-4xl font-black opacity-20 group-hover:opacity-40 transition-opacity duration-300">
+            0{index}
+          </span>
+        </div>
+
+        {/* Centered Content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10 pointer-events-none text-center">
+          <h3 className="text-3xl md:text-5xl lg:text-7xl font-black uppercase tracking-tight mb-2">
+            {item.name}
+          </h3>
+          <p className="text-sm md:text-lg font-bold opacity-60">
+            Domain: {item.domain}
+          </p>
+        </div>
+
+        {/* Bottom Arrow */}
+        <div className="relative z-10 flex justify-end w-full">
+          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-foreground text-background flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-xl">
+            <ArrowRight strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6 -rotate-45" />
           </div>
-
-          {/* Bottom Row */}
-          <div className="relative z-10">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight uppercase leading-none mb-4 group-hover:-translate-y-2 transition-transform duration-500">
-              {leftProject.name}
-            </h3>
-
-            <div className="w-full h-[1px] bg-current/20 my-6 relative overflow-hidden hidden md:block">
-              <div className="absolute top-0 left-0 h-full w-full bg-current -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-            </div>
-
-            <div className="flex justify-between items-end mt-4 md:mt-0">
-              <p className="text-[10px] md:text-sm font-bold uppercase tracking-widest opacity-50 group-hover:opacity-100">
-                {leftProject.domain}
-              </p>
-              <ArrowRight className="w-6 h-6 group-hover:-rotate-45 group-hover:scale-125 transition-transform duration-500" />
-            </div>
-          </div>
-        </a>
-      )}
-
-      {/* Right Panel */}
-      {rightProject && (
-        <a
-          href={rightProject.url}
-          target="_blank"
-          rel="noreferrer"
-          className="w-full md:w-1/2 h-1/2 md:h-full bg-background border border-foreground/20 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 flex flex-col justify-between group hover:bg-foreground hover:text-background transition-colors duration-500 shadow-2xl relative overflow-hidden"
-        >
-          {/* Top Row */}
-          <div className="flex justify-between items-start relative z-10">
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest px-4 py-1.5 border border-current rounded-full opacity-60 group-hover:opacity-100">
-              {rightProject.category}
-            </span>
-            <span className="text-lg md:text-xl font-black opacity-20">0{index * 2 + 2}</span>
-          </div>
-
-          {/* Bottom Row */}
-          <div className="relative z-10">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight uppercase leading-none mb-4 group-hover:-translate-y-2 transition-transform duration-500">
-              {rightProject.name}
-            </h3>
-
-            <div className="w-full h-[1px] bg-current/20 my-6 relative overflow-hidden hidden md:block">
-              <div className="absolute top-0 left-0 h-full w-full bg-current -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-            </div>
-
-            <div className="flex justify-between items-end mt-4 md:mt-0">
-              <p className="text-[10px] md:text-sm font-bold uppercase tracking-widest opacity-50 group-hover:opacity-100">
-                {rightProject.domain}
-              </p>
-              <ArrowRight className="w-6 h-6 group-hover:-rotate-45 group-hover:scale-125 transition-transform duration-500" />
-            </div>
-          </div>
-        </a>
-      )}
+        </div>
+      </a>
     </motion.div>
-  )
+  );
 }

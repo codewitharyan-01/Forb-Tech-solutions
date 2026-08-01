@@ -1,15 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/Button"
-import { ArrowRight, CheckCircle2 } from "lucide-react"
-import { Magnetic } from "@/components/ui/Magnetic"
+import { CheckCircle2 } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const rotatingWords = ["Websites", "Mobile Apps", "AI Solutions", "E-Commerce", "SaaS Products"];
 
+
+
+const WireframeCube = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" className={className}>
+    <polygon points="50,5 95,28 95,72 50,95 5,72 5,28" />
+    <line x1="50" y1="50" x2="50" y2="95" />
+    <line x1="50" y1="50" x2="95" y2="28" />
+    <line x1="50" y1="50" x2="5" y2="28" />
+    <line x1="50" y1="5" x2="50" y2="50" strokeDasharray="1 3" opacity="0.5" />
+    <line x1="5" y1="72" x2="50" y2="50" strokeDasharray="1 3" opacity="0.5" />
+    <line x1="95" y1="72" x2="50" y2="50" strokeDasharray="1 3" opacity="0.5" />
+  </svg>
+);
+
+const WireframePyramid = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" className={className}>
+    <polygon points="50,15 85,75 15,75" />
+    <line x1="50" y1="15" x2="50" y2="85" />
+    <line x1="85" y1="75" x2="50" y2="85" />
+    <line x1="15" y1="75" x2="50" y2="85" />
+    <line x1="50" y1="15" x2="50" y2="65" strokeDasharray="1 3" opacity="0.5" />
+    <line x1="15" y1="75" x2="85" y2="75" strokeDasharray="1 3" opacity="0.5" />
+  </svg>
+);
+
+const WireframeRocket = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" strokeLinecap="round" className={className}>
+    {/* Main Body */}
+    <path d="M50,10 C50,10 35,30 35,70 L65,70 C65,30 50,10 50,10 Z" />
+    {/* Center Line for CAD 3D effect */}
+    <line x1="50" y1="10" x2="50" y2="70" strokeDasharray="1 2" />
+    {/* Horizontal body rings */}
+    <path d="M40,30 Q50,35 60,30" opacity="0.6"/>
+    <path d="M37,50 Q50,55 63,50" opacity="0.6"/>
+    
+    {/* Aerodynamic Fins */}
+    <polygon points="35,55 20,85 35,70" />
+    <polygon points="65,55 80,85 65,70" />
+    <polygon points="45,70 50,85 55,70" />
+    
+    {/* Hyper Speed Exhaust Trails */}
+    <line x1="50" y1="85" x2="50" y2="120" strokeDasharray="2 4" />
+    <line x1="42" y1="75" x2="42" y2="110" strokeDasharray="1 4" opacity="0.5" />
+    <line x1="58" y1="75" x2="58" y2="110" strokeDasharray="1 4" opacity="0.5" />
+    
+    {/* Additional technical details */}
+    <circle cx="50" cy="40" r="3" opacity="0.8" />
+  </svg>
+);
+
+const WireframeCylinder = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" className={className}>
+    <ellipse cx="50" cy="20" rx="30" ry="10" />
+    <ellipse cx="50" cy="80" rx="30" ry="10" strokeDasharray="1 3" opacity="0.5" />
+    <line x1="20" y1="20" x2="20" y2="80" />
+    <line x1="80" y1="20" x2="80" y2="80" />
+  </svg>
+);
+
+const WireframeOctahedron = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" className={className}>
+    <polygon points="50,5 95,50 50,95 5,50" />
+    <line x1="50" y1="5" x2="50" y2="95" />
+    <line x1="5" y1="50" x2="95" y2="50" />
+    <polygon points="50,5 75,50 50,95 25,50" />
+  </svg>
+);
+
 export function Hero() {
-  const whatsappUrl = "https://wa.me/919023668571?text=Hello%20ForbTech!%20I'm%20interested%20in%20starting%20a%20new%20project.%20Can%20we%20discuss%20my%20requirements%3F";
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
@@ -20,146 +85,172 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden py-10 md:py-16 z-10 bg-background/50">
+    <section className="relative overflow-hidden min-h-[100dvh] flex flex-col justify-center pt-20 pb-10 md:pt-32 md:pb-16 z-10 bg-background/50">
 
-      {/* Ambient Glow */}
-      <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] bg-primary/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[300px] h-[300px] bg-foreground/5 rounded-full blur-[80px] pointer-events-none" />
+      {/* Subtle Ambient Glow */}
+      <div className="absolute top-0 right-[10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-foreground/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto w-full relative z-10 px-5 md:px-8">
+      {/* Rotating 3D Wireframes Constellation */}
+      <motion.div
+        animate={{ rotate: 360, rotateX: 20, rotateY: 45 }}
+        transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[10%] right-[10%] w-32 h-32 md:w-56 md:h-56 text-foreground/10 pointer-events-none hidden md:block"
+      >
+        <WireframeOctahedron />
+      </motion.div>
 
-        {/* Top Row: Tag + Stats */}
+      <motion.div
+        animate={{ rotate: -360, rotateX: -10, rotateY: 20 }}
+        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-[5%] left-[2%] w-48 h-48 md:w-72 md:h-72 text-foreground/10 pointer-events-none hidden md:block"
+      >
+        <WireframeCube />
+      </motion.div>
+
+      <motion.div
+        animate={{ rotate: 360, rotateX: 20, rotateY: -15 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[20%] left-[15%] w-32 h-32 md:w-48 md:h-48 text-primary/10 pointer-events-none hidden md:block"
+      >
+        <WireframePyramid />
+      </motion.div>
+
+      <div className="absolute bottom-[-10%] right-[30%] w-24 h-24 md:w-36 md:h-36 pointer-events-none hidden md:block rotate-45 z-0">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-wrap items-center justify-between gap-4 mb-8 md:mb-12"
+          animate={{
+            y: [300, 300, 298, 302, 298, 300, 200, 0, -2000],
+            x: [0, 0, -2, 2, -1, 0, 0, 0, 0],
+            scale: [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.85, 0.9, 0.4],
+            opacity: [0, 1, 1, 1, 1, 1, 1, 1, 0]
+          }}
+          transition={{
+            duration: 40,
+            times: [0, 0.05, 0.07, 0.09, 0.11, 0.15, 0.4, 0.8, 1],
+            repeat: Infinity,
+            repeatDelay: 8,
+            ease: "easeInOut"
+          }}
+          className="w-full h-full text-primary/50 drop-shadow-[0_0_20px_rgba(var(--primary),0.4)]"
         >
-          <div className="inline-flex items-center gap-2 border border-foreground/10 rounded-full px-3 py-1.5 bg-background/60 backdrop-blur-md">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-[9px] font-bold uppercase tracking-widest">Available for projectsth</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <div className="text-right">
-              <span className="block text-xl md:text-2xl font-black tracking-tight">50+</span>
-              <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Projects</span>
-            </div>
-            <div className="w-px h-8 bg-foreground/10" />
-            <div className="text-right">
-              <span className="block text-xl md:text-2xl font-black tracking-tight">8+</span>
-              <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Industries</span>
-            </div>
-          </div>
+          <WireframeRocket />
         </motion.div>
+      </div>
 
-        {/* The Creative Headline Block */}
-        <div className="mb-8 md:mb-12">
+      <motion.div
+        animate={{ rotate: 180, rotateX: 60, rotateY: -20 }}
+        transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[40%] right-[3%] w-24 h-24 md:w-40 md:h-40 text-primary/5 pointer-events-none hidden md:block"
+      >
+        <WireframeCylinder />
+      </motion.div>
+
+      <motion.div
+        animate={{ rotate: -180, rotateX: -40, rotateY: 50 }}
+        transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+        className="absolute top-[5%] left-[40%] w-20 h-20 md:w-32 md:h-32 text-foreground/5 pointer-events-none hidden md:block"
+      >
+        <WireframeCube />
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto w-full relative z-10 px-5 md:px-8">
+
+        <div className="flex flex-col gap-10 md:gap-24">
+          
+          {/* Top Row: Badge & Stats */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8"
           >
-            {/* Line 1: "We Build" in small caps + rotating word */}
-            <div className="flex flex-wrap items-baseline gap-x-4 md:gap-x-6 mb-1">
-              <span className="text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-muted-foreground pt-2">We Build</span>
-              <div className="relative h-[3rem] md:h-[5.5rem] overflow-hidden">
-                <motion.span
-                  key={wordIndex}
-                  initial={{ y: 60, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -60, opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="block text-[2.8rem] md:text-[5.5rem] font-black tracking-tighter leading-none text-primary"
-                >
-                  {rotatingWords[wordIndex]}
-                </motion.span>
+            <div className="inline-flex items-center gap-3 border border-foreground/10 rounded-full px-5 py-2.5 bg-background/60 backdrop-blur-md shadow-sm">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Available for projects</span>
+            </div>
+
+            <div className="flex items-center gap-10">
+              <div className="flex flex-col sm:text-right">
+                <span className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-1">15+</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Projects</span>
+              </div>
+              <div className="w-px h-12 bg-foreground/10 hidden sm:block" />
+              <div className="flex flex-col text-left">
+                <span className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-1 text-primary">#1</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Univ Rank</span>
               </div>
             </div>
+          </motion.div>
 
-            {/* Line 2: "That Drive" in massive hollow stroke + "Growth" solid */}
-            <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5">
+          {/* Headline Block */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="flex flex-col gap-2 md:gap-4"
+          >
+            <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-muted-foreground ml-1 md:ml-2">
+              I Build
+            </span>
+            <div className="relative h-[3.5rem] md:h-[7.5rem] overflow-hidden -ml-1 md:-ml-2">
+              <motion.span
+                key={wordIndex}
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none text-primary"
+              >
+                {rotatingWords[wordIndex]}
+              </motion.span>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-4 md:gap-x-6 -ml-1 md:-ml-2 mt-2 md:mt-4">
               <span
-                className="text-[2.8rem] md:text-[5.5rem] font-black tracking-tighter leading-none select-none"
+                className="text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none select-none opacity-80"
                 style={{
-                  WebkitTextStroke: '1.5px currentColor',
+                  WebkitTextStroke: '2px currentColor',
                   WebkitTextFillColor: 'transparent'
                 }}
               >
                 That Drive
               </span>
-              <span className="text-[2.8rem] md:text-[5.5rem] font-black tracking-tighter leading-none text-foreground">
+              <span className="text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none text-foreground">
                 Growth.
               </span>
             </div>
           </motion.div>
-        </div>
 
-        {/* Bottom Row: Description + CTA + Value Props */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35 }}
-          className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-16"
-        >
-          {/* Left: Paragraph */}
-          <p className="text-sm md:text-base font-medium text-muted-foreground max-w-sm leading-relaxed">
-            We help businesses transform ideas into powerful digital products — from concept to launch, end-to-end.
-          </p>
+          {/* Bottom Row: Description, Value Props, Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end border-t border-foreground/10 pt-10"
+          >
+            <div className="lg:col-span-4">
+              <p className="text-base md:text-lg font-medium text-muted-foreground leading-relaxed max-w-sm">
+                I help businesses transform ideas into powerful digital products — from concept to launch, end-to-end.
+              </p>
+            </div>
 
-          {/* Center: Buttons */}
-          <div className="flex flex-row gap-3 shrink-0">
-            <Magnetic>
-              <Button
-                onClick={() => window.open(whatsappUrl, '_blank')}
-                className="h-12 md:h-14 px-6 md:px-10 rounded-full text-xs md:text-sm font-bold shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.03] transition-all"
-              >
-                Start a Project <ArrowRight className="w-4 h-4 ml-1.5" />
-              </Button>
-            </Magnetic>
-            <Magnetic>
-              <Button
-                variant="glass"
-                className="h-12 md:h-14 px-6 md:px-10 rounded-full text-xs md:text-sm font-bold border border-foreground/15 group"
-                onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Our Work
-              </Button>
-            </Magnetic>
-          </div>
-
-          {/* Right: Value Props */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2 lg:ml-auto">
-            {["Free Consultation", "Custom Quote", "End-to-End Dev"].map((item, i) => (
-              <div key={i} className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
-                <span className="text-[11px] font-bold tracking-tight text-foreground/70">{item}</span>
+            <div className="lg:col-span-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+              <div className="flex flex-col gap-4">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">What you get</span>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                  {["Free Consultation", "Custom Quote", "End-to-End Dev"].map((item, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <CheckCircle2 strokeWidth={1.2} className="w-4 h-4 text-primary shrink-0" />
+                      <span className="text-xs md:text-sm font-bold tracking-tight text-foreground/80">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+
+        </div>
 
       </div>
-
-      {/* Full-width Marquee Ticker */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.8 }}
-        className="mt-10 md:mt-16 border-t border-b border-foreground/5 py-3 overflow-hidden"
-      >
-        <div className="flex whitespace-nowrap animate-[marquee_25s_linear_infinite]">
-          {[...Array(2)].map((_, idx) => (
-            <span key={idx} className="flex items-center gap-8 mr-8">
-              {["CUSTOM SOFTWARE", "WEB APPS", "MOBILE APPS", "AI / ML", "E-COMMERCE", "UI/UX DESIGN", "CLOUD & DEVOPS", "IT CONSULTING"].map((s, i) => (
-                <span key={i} className="flex items-center gap-8">
-                  <span className="text-xs font-black uppercase tracking-[0.25em] text-foreground/15">{s}</span>
-                  <span className="text-foreground/10">✦</span>
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </motion.div>
 
     </section>
   )

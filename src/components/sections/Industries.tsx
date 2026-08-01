@@ -5,14 +5,14 @@ import { useState } from "react"
 import { Building2, ShoppingBag, Stethoscope, GraduationCap, Landmark, Home, Factory, Truck, Utensils, X } from "lucide-react"
 
 const industries = [
-  { id: "startups", name: "Startups", icon: <Building2 className="w-5 h-5 md:w-6 md:h-6" />, desc: "Agile MVPs & scaling infrastructure built for rapid iteration and Series A readiness.", stats: ["Rapid Prototyping", "Scalable Architecture"] },
-  { id: "finance", name: "Finance", icon: <Landmark className="w-5 h-5 md:w-6 md:h-6" />, desc: "Secure fintech & banking systems with military-grade compliance and encryption.", stats: ["SOC2 Compliant", "End-to-End Encryption"] },
-  { id: "ecommerce", name: "E-Commerce", icon: <ShoppingBag className="w-5 h-5 md:w-6 md:h-6" />, desc: "High-conversion storefronts capable of handling massive Black Friday traffic spikes.", stats: ["Sub-second Loads", "Global CDNs"] },
-  { id: "healthcare", name: "Healthcare", icon: <Stethoscope className="w-5 h-5 md:w-6 md:h-6" />, desc: "HIPAA compliant systems protecting sensitive patient data and telehealth workflows.", stats: ["HIPAA Compliant", "Data Redundancy"] },
-  { id: "education", name: "Education", icon: <GraduationCap className="w-5 h-5 md:w-6 md:h-6" />, desc: "EdTech & learning platforms serving millions of concurrent active users worldwide.", stats: ["High Concurrency", "Video Streaming"] },
-  { id: "realestate", name: "Real Estate", icon: <Home className="w-5 h-5 md:w-6 md:h-6" />, desc: "Property tech solutions redefining how we buy, sell, and manage physical assets.", stats: ["Data Pipelines", "Geospatial APIs"] },
-  { id: "manufacturing", name: "Manufacturing", icon: <Factory className="w-5 h-5 md:w-6 md:h-6" />, desc: "IoT & supply chain dashboards for factory floor analytics and real-time monitoring.", stats: ["IoT Integration", "Real-time Sockets"] },
-  { id: "logistics", name: "Logistics", icon: <Truck className="w-5 h-5 md:w-6 md:h-6" />, desc: "Global tracking & fleet management algorithms optimizing routes instantly.", stats: ["Route Optimization", "Live Tracking"] }
+  { id: "startups", name: "Startups", icon: <Building2 strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "Agile MVPs & scaling infrastructure built for rapid iteration and Series A readiness.", stats: ["Rapid Prototyping", "Scalable Architecture"] },
+  { id: "finance", name: "Finance", icon: <Landmark strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "Secure fintech & banking systems with military-grade compliance and encryption.", stats: ["SOC2 Compliant", "End-to-End Encryption"] },
+  { id: "ecommerce", name: "E-Commerce", icon: <ShoppingBag strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "High-conversion storefronts capable of handling massive Black Friday traffic spikes.", stats: ["Sub-second Loads", "Global CDNs"] },
+  { id: "healthcare", name: "Healthcare", icon: <Stethoscope strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "HIPAA compliant systems protecting sensitive patient data and telehealth workflows.", stats: ["HIPAA Compliant", "Data Redundancy"] },
+  { id: "education", name: "Education", icon: <GraduationCap strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "EdTech & learning platforms serving millions of concurrent active users worldwide.", stats: ["High Concurrency", "Video Streaming"] },
+  { id: "realestate", name: "Real Estate", icon: <Home strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "Property tech solutions redefining how we buy, sell, and manage physical assets.", stats: ["Data Pipelines", "Geospatial APIs"] },
+  { id: "manufacturing", name: "Manufacturing", icon: <Factory strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "IoT & supply chain dashboards for factory floor analytics and real-time monitoring.", stats: ["IoT Integration", "Real-time Sockets"] },
+  { id: "logistics", name: "Logistics", icon: <Truck strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6" />, desc: "Global tracking & fleet management algorithms optimizing routes instantly.", stats: ["Route Optimization", "Live Tracking"] }
 ]
 
 export function Industries() {
@@ -95,7 +95,7 @@ export function Industries() {
                           }}
                           className="w-10 h-10 rounded-full bg-background/20 hover:bg-background/40 flex items-center justify-center transition-colors"
                         >
-                          <X className="w-5 h-5" />
+                          <X strokeWidth={1.2} className="w-5 h-5" />
                         </button>
                       </div>
 

@@ -6,9 +6,21 @@ import { Logo } from "@/components/ui/Logo"
 
 export function Loader() {
   const [loading, setLoading] = useState(true)
+  const [shouldRun, setShouldRun] = useState(false)
   const counterRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
+    // Only run once per session
+    const hasRun = sessionStorage.getItem('loaderHasRun')
+    if (hasRun) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLoading(false)
+      return
+    }
+    
+    setShouldRun(true)
+    sessionStorage.setItem('loaderHasRun', 'true')
+
     // Stop scrolling while loading
     document.body.style.overflow = "hidden"
     
@@ -35,6 +47,8 @@ export function Loader() {
       document.body.style.overflow = "auto"
     }
   }, [])
+
+  if (!shouldRun && !loading) return null;
 
   return (
     <AnimatePresence>

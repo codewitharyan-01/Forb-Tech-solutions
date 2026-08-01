@@ -42,7 +42,7 @@ export function WhyChoose() {
               <h3 className="text-4xl md:text-5xl font-black tracking-tighter uppercase whitespace-nowrap opacity-90 hover:opacity-100 hover:text-primary transition-colors cursor-default">
                 {reason}
               </h3>
-              <Sparkles className="w-8 h-8 text-primary shrink-0 opacity-50" />
+              <Sparkles strokeWidth={1.2} className="w-8 h-8 text-primary shrink-0 opacity-50" />
             </div>
           ))}
         </div>

@@ -46,21 +46,21 @@ export function Contact() {
           <div className="flex flex-col gap-3 mb-8">
             {["Free Consultation", "Custom Quote", "End-to-End Development"].map((item, i) => (
               <div key={i} className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 opacity-50" />
+                <CheckCircle2 strokeWidth={1.2} className="w-4 h-4 opacity-50" />
                 <span className="text-sm font-bold">{item}</span>
               </div>
             ))}
           </div>
           
           <Button className="h-14 rounded-full px-8 font-bold shadow-md hover:-translate-y-0.5 transition-transform">
-            Let's Build Something Amazing <ArrowRight className="w-4 h-4 ml-2" />
+            Let&apos;s Build Something Amazing <ArrowRight strokeWidth={1.2} className="w-4 h-4 ml-2" />
           </Button>
         </div>
 
         <div className="flex-1 glass-light dark:glass-dark rounded-[2rem] border border-foreground/10 p-6 flex flex-col gap-4 relative z-10 bg-background/50 backdrop-blur-xl">
           <div className="flex items-center gap-4 border-b border-foreground/10 pb-4">
             <div className="w-12 h-12 rounded-full bg-foreground/10 flex items-center justify-center">
-              <User className="w-6 h-6 opacity-70" />
+              <User strokeWidth={1.2} className="w-6 h-6 opacity-70" />
             </div>
             <div>
               <h4 className="font-bold">Aryan Patel</h4>
@@ -68,10 +68,10 @@ export function Contact() {
             </div>
           </div>
           <div className="flex flex-col gap-3 pt-2">
-             <a href="tel:+919023668571" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Phone className="w-4 h-4 opacity-50" /> +91 9023668571</a>
-             <a href="mailto:forbteck@gmail.com" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Mail className="w-4 h-4 opacity-50" /> forbteck@gmail.com</a>
-             <a href="https://forbtech.varcel.app" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Globe className="w-4 h-4 opacity-50" /> forbtech.varcel.app</a>
-             <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground"><MapPin className="w-4 h-4 opacity-50" /> Ahmedabad, Gujarat, India</div>
+             <a href="tel:+919023668571" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Phone strokeWidth={1.2} className="w-4 h-4 opacity-50" /> +91 9023668571</a>
+             <a href="mailto:forbteck@gmail.com" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Mail strokeWidth={1.2} className="w-4 h-4 opacity-50" /> forbteck@gmail.com</a>
+             <a href="https://forbtech.varcel.app" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Globe strokeWidth={1.2} className="w-4 h-4 opacity-50" /> forbtech.varcel.app</a>
+             <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground"><MapPin strokeWidth={1.2} className="w-4 h-4 opacity-50" /> Ahmedabad, Gujarat, India</div>
           </div>
         </div>
       </motion.div>

@@ -23,7 +23,7 @@ function SectionWrapper({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen pb-4 gap-8 px-4 md:px-8 pt-32">
+    <div className="flex flex-col min-h-screen pb-4 gap-4 px-2 md:px-4 pt-24">
       <SectionWrapper><Hero /></SectionWrapper>
       <SectionWrapper><Services /></SectionWrapper>
       <SectionWrapper><WhyChoose /></SectionWrapper>

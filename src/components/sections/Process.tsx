@@ -156,7 +156,7 @@ export function Process() {
                     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       {steps[activeIndex].deliverables.map((item, idx) => (
                         <li key={idx} className="flex items-center gap-3 text-sm font-bold text-foreground">
-                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                          <CheckCircle2 strokeWidth={1.2} className="w-5 h-5 text-primary shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}

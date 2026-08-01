@@ -1,9 +1,12 @@
 "use client";
 
 import { motion, AnimatePresence, useScroll, useMotionValueEvent, Variants } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/Button"
 import { Logo } from "@/components/ui/Logo"
+import { MapPin, ArrowUpRight, Globe, Smartphone, MessageCircle } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const menuVariants: Variants = {
   closed: {
@@ -37,10 +40,67 @@ const linkVariants: Variants = {
   })
 };
 
+function LiveTime() {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = { 
+        timeZone: 'Asia/Kolkata', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: true 
+      };
+      setTime(now.toLocaleTimeString('en-US', options) + " IST");
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
+  return <p className="text-sm font-mono text-muted-foreground mt-1 flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> {time || "Loading time..."}</p>;
+}
+
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { scrollY } = useScroll()
+  const pathname = usePathname()
+  const isHome = pathname === "/"
+  const [activeSection, setActiveSection] = useState("Home")
+  
+  useEffect(() => {
+    if (!isHome) return;
+
+    const sections = ["hero", "services", "process", "ecosystem", "work"];
+    
+    const handleScroll = () => {
+      let current = "Home";
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 3) {
+            current = section === "hero" ? "Home" : section.charAt(0).toUpperCase() + section.slice(1);
+            if (section === "work") current = "Our Work";
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
+
+  const displayTitle = isHome ? activeSection : (
+    pathname.includes("about") ? "About Us" :
+    pathname.includes("careers") ? "Careers" :
+    pathname.includes("privacy") ? "Privacy Policy" :
+    pathname.includes("terms") ? "Terms of Service" : "Page"
+  );
   
   const whatsappUrl = "https://wa.me/919023668571?text=Hello%20ForbTech!%20I'm%20interested%20in%20starting%20a%20new%20project.%20Can%20we%20discuss%20my%20requirements%3F";
 
@@ -58,37 +118,37 @@ export function Navbar() {
       <motion.header 
         className="fixed top-6 left-4 right-4 md:left-8 md:right-8 z-[100] pointer-events-none flex items-center justify-between"
       >
-        {/* Left: Floating Brand */}
-        <div className={`pointer-events-auto flex-shrink-0 relative z-[101] transition-all duration-500 rounded-full border px-5 py-2.5 ${isScrolled && !menuOpen ? 'bg-background/80 backdrop-blur-xl border-border/50 shadow-lg' : 'bg-background/40 backdrop-blur-md border-border/20 shadow-sm'}`}>
-          <a href="#" className="block">
-            <Logo className={`h-6 md:h-7 transition-colors duration-300 ${menuOpen ? 'text-foreground' : ''}`} />
-          </a>
+        <div className="pointer-events-auto flex items-center gap-2 z-[101]">
+          {/* Logo Capsule */}
+          <div className={`transition-all duration-500 rounded-full border px-5 py-2.5 ${isScrolled && !menuOpen ? 'bg-background/80 backdrop-blur-xl border-border/50 shadow-lg' : 'bg-background/40 backdrop-blur-md border-border/20 shadow-sm'}`}>
+            <Link href="/" className="block">
+              <Logo className={`h-6 md:h-7 transition-colors duration-300 ${menuOpen ? 'text-foreground' : ''}`} />
+            </Link>
+          </div>
         </div>
 
-        {/* Center: The Dock (Desktop Only) */}
-        <div className={`hidden md:flex pointer-events-auto absolute left-1/2 -translate-x-1/2 transition-all duration-500 rounded-full border px-8 py-3.5 items-center gap-10 shadow-xl ${isScrolled ? 'bg-foreground text-background border-foreground/10' : 'bg-background/80 backdrop-blur-xl border-border/50'}`}>
-          <a href="#services" className={`text-xs font-bold tracking-widest uppercase transition-colors ${isScrolled ? 'hover:text-primary' : 'hover:text-primary'}`}>Services</a>
-          <a href="#process" className={`text-xs font-bold tracking-widest uppercase transition-colors ${isScrolled ? 'hover:text-primary' : 'hover:text-primary'}`}>Process</a>
-          <a href="#ecosystem" className={`text-xs font-bold tracking-widest uppercase transition-colors ${isScrolled ? 'hover:text-primary' : 'hover:text-primary'}`}>Ecosystem</a>
-          <a href="#work" className={`text-xs font-bold tracking-widest uppercase transition-colors ${isScrolled ? 'hover:text-primary' : 'hover:text-primary'}`}>Our Work</a>
-        </div>
-
-        {/* Right: Floating CTA & Mobile Menu */}
+        {/* Right: Active Section & Mobile Menu */}
         <div className="pointer-events-auto flex items-center gap-4 relative z-[101]">
-          {/* CTA (Desktop) */}
-          <div className="hidden md:block">
-            <Button 
-              onClick={() => window.open(whatsappUrl, '_blank')}
-              className={`rounded-full px-6 h-11 text-sm font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all ${isScrolled ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-primary text-primary-foreground hover:bg-primary/90'}`}
-            >
-              Start Project
-            </Button>
+          {/* Active Section Capsule (Desktop) */}
+          <div className={`hidden md:flex transition-all duration-500 rounded-full border px-6 py-2.5 items-center justify-center overflow-hidden min-w-[140px] shadow-sm ${isScrolled && !menuOpen ? 'bg-foreground text-background border-foreground/10 shadow-lg' : 'bg-background/80 backdrop-blur-xl border-border/50'}`}>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={displayTitle}
+                initial={{ rotateX: 90, opacity: 0, y: 10 }}
+                animate={{ rotateX: 0, opacity: 1, y: 0 }}
+                exit={{ rotateX: -90, opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="text-[10px] font-bold tracking-widest uppercase block origin-center text-center w-full"
+              >
+                {displayTitle}
+              </motion.span>
+            </AnimatePresence>
           </div>
 
-          {/* Morphing Hamburger (Mobile) */}
+          {/* Morphing Hamburger */}
           <button 
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`md:hidden w-12 h-12 flex flex-col items-center justify-center gap-1.5 transition-all duration-500 rounded-full border ${isScrolled && !menuOpen ? 'bg-background/80 backdrop-blur-xl border-border/50 shadow-lg' : 'bg-background/40 backdrop-blur-md border-border/20 shadow-sm'}`}
+            className={`w-12 h-12 flex flex-col items-center justify-center gap-1.5 transition-all duration-500 rounded-full border ${isScrolled && !menuOpen ? 'bg-background/80 backdrop-blur-xl border-border/50 shadow-lg' : 'bg-background/40 backdrop-blur-md border-border/20 shadow-sm'}`}
           >
             <motion.span 
               animate={menuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
@@ -114,46 +174,85 @@ export function Navbar() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-[90] bg-background flex flex-col md:hidden"
+            className="fixed inset-0 z-[90] bg-background flex flex-col"
           >
-            {/* Mobile Menu Links */}
-            <div className="flex flex-col px-8 pt-32 pb-8 gap-8 h-full">
-              {[
-                { label: 'Services', href: '#services' },
-                { label: 'Process', href: '#process' },
-                { label: 'Ecosystem', href: '#ecosystem' },
-                { label: 'Our Work', href: '#work' }
-              ].map((item, i) => (
-                <motion.a 
-                  key={i}
-                  custom={i}
-                  variants={linkVariants}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-4xl sm:text-5xl font-black tracking-tighter hover:text-primary transition-colors"
-                >
-                  {item.label}
-                </motion.a>
-              ))}
+            {/* Bento Dashboard Menu Links */}
+            <div className="flex flex-col md:grid md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-6 px-4 md:px-8 pt-28 pb-8 h-full max-w-7xl mx-auto w-full overflow-y-auto">
               
+              {/* Box 1: Navigation Links */}
               <motion.div 
-                custom={4}
-                variants={linkVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="mt-auto mb-8"
+                custom={0} variants={linkVariants} initial="closed" animate="open" exit="closed"
+                className="md:col-span-2 md:row-span-2 rounded-[2rem] bg-background/50 border border-border/50 p-8 md:p-12 flex flex-col justify-center gap-6 md:gap-8 shadow-sm backdrop-blur-md"
               >
+                <div className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-4">
+                  Navigation
+                </div>
+                {isHome ? (
+                  [
+                    { label: 'Services', href: '/#services' },
+                    { label: 'Process', href: '/#process' },
+                    { label: 'Ecosystem', href: '/#ecosystem' },
+                    { label: 'Our Work', href: '/#work' }
+                  ].map((item, i) => (
+                    <Link 
+                      key={i}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-4xl md:text-6xl font-black tracking-tighter hover:text-primary hover:translate-x-4 transition-all duration-300 block w-max"
+                    >
+                      {item.label}
+                    </Link>
+                  ))
+                ) : (
+                  <Link 
+                    href="/"
+                    onClick={() => setMenuOpen(false)}
+                    className="text-4xl md:text-6xl font-black tracking-tighter hover:text-primary hover:translate-x-4 transition-all duration-300 block w-max"
+                  >
+                    Back to Home
+                  </Link>
+                )}
+              </motion.div>
+
+              {/* Box 2: Location & Time */}
+              <motion.div 
+                custom={1} variants={linkVariants} initial="closed" animate="open" exit="closed"
+                className="md:col-span-1 md:row-span-1 rounded-[2rem] bg-background/50 border border-border/50 p-8 flex flex-col relative overflow-hidden group backdrop-blur-md shadow-sm"
+              >
+                <div className="flex items-center gap-2 text-muted-foreground mb-auto relative z-10">
+                  <MapPin className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Base of Operations</span>
+                </div>
+                <div className="mt-12 relative z-10">
+                  <h4 className="text-2xl font-black tracking-tight">Ahmedabad, India</h4>
+                  <LiveTime />
+                </div>
+                <Globe className="absolute -bottom-10 -right-10 w-48 h-48 text-foreground/5 group-hover:text-primary/10 transition-colors duration-500 pointer-events-none" />
+              </motion.div>
+
+              {/* Box 3: Socials & CTA */}
+              <motion.div 
+                custom={2} variants={linkVariants} initial="closed" animate="open" exit="closed"
+                className="md:col-span-1 md:row-span-1 flex flex-col gap-4 md:gap-6 min-h-[200px]"
+              >
+                {/* Socials Sub-grid */}
+                <div className="flex gap-4 md:gap-6 h-1/2">
+                  <a href="tel:+919023668571" className="flex-1 rounded-[2rem] bg-background/50 border border-border/50 flex items-center justify-center hover:bg-foreground/5 hover:text-primary transition-colors shadow-sm backdrop-blur-md group">
+                    <Smartphone strokeWidth={1.2} className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a href="https://wa.me/919023668571" target="_blank" rel="noopener noreferrer" className="flex-1 rounded-[2rem] bg-background/50 border border-border/50 flex items-center justify-center hover:bg-foreground/5 hover:text-primary transition-colors shadow-sm backdrop-blur-md group">
+                    <MessageCircle strokeWidth={1.2} className="w-8 h-8 group-hover:scale-110 transition-transform" />
+                  </a>
+                </div>
+                {/* CTA */}
                 <Button 
                   onClick={() => window.open(whatsappUrl, '_blank')}
-                  className="w-full h-16 rounded-full text-xl font-bold bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="flex-1 rounded-[2rem] bg-primary text-primary-foreground text-xl md:text-2xl font-bold hover:bg-primary/90 flex items-center justify-center gap-3 w-full h-1/2 shadow-lg group"
                 >
-                  Start Project
+                  Start Project <ArrowUpRight className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Button>
               </motion.div>
+
             </div>
           </motion.div>
         )}

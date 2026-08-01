@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Globe, Mail, Phone } from "lucide-react";
 import { NetworkBackground } from "@/components/ui/NetworkBackground";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const WORDS = ["amazing", "extraordinary", "revolutionary", "visionary", "next-gen"];
 
@@ -54,7 +55,7 @@ export function Footer() {
             onClick={() => window.open(whatsappUrl, '_blank')}
             className="group relative flex items-center gap-3 bg-primary text-primary-foreground px-6 py-3 rounded-full text-base md:text-lg font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_40px_rgba(var(--primary),0.3)] hover:shadow-[0_0_60px_rgba(var(--primary),0.5)]"
           >
-            <Phone className="w-5 h-5 md:w-6 md:h-6 animate-[ring_10s_ease-in-out_infinite]" />
+            <Phone strokeWidth={1.2} className="w-5 h-5 md:w-6 md:h-6 animate-[ring_10s_ease-in-out_infinite]" />
             Let&apos;s Talk
             <div className="absolute inset-0 rounded-full border border-primary/50 scale-110 opacity-0 group-hover:animate-ping" />
           </button>
@@ -72,8 +73,8 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start gap-4">
             <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-background/30">Company</span>
             <div className="flex gap-6">
-              <a href="#" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">About Us</a>
-              <a href="mailto:forbteck@gmail.com" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">Careers</a>
+              <Link href="/about" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">About Us</Link>
+              <Link href="/careers" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">Careers</Link>
             </div>
           </div>
 
@@ -87,7 +88,7 @@ export function Footer() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.547 12 3.547 12 3.547s-7.505 0-9.377.503a3.015 3.015 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.503 9.377.503 9.377.503s7.505 0 9.377-.503a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
               </a>
               <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Website">
-                <Globe className="w-5 h-5" />
+                <Globe strokeWidth={1.2} className="w-5 h-5" />
               </a>
               <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
@@ -96,7 +97,7 @@ export function Footer() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
               </a>
               <a href="mailto:forbteck@gmail.com" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Email Us">
-                <Mail className="w-5 h-5" />
+                <Mail strokeWidth={1.2} className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -121,8 +122,8 @@ export function Footer() {
           </a>
           
           <div className="w-auto flex justify-end gap-2 md:gap-6 whitespace-nowrap">
-            <a href="#" className="hover:text-background transition-colors">Privacy</a>
-            <a href="#" className="hover:text-background transition-colors">Terms</a>
+            <Link href="/privacy" className="hover:text-background transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-background transition-colors">Terms</Link>
           </div>
         </motion.div>
       </div>
