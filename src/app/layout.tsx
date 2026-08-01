@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ForbTech | Innovate. Build. Scale.",
+  title: "ForbTech",
   description: "We help startups, businesses, and enterprises build custom software, websites, AI solutions, and scalable digital products that accelerate growth.",
 };
 
