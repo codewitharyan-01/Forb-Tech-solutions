@@ -54,45 +54,26 @@ export function Loader() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            {/* The SVG Logo */}
-            <svg width="120" height="120" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-6 drop-shadow-[0_0_30px_rgba(0,198,255,0.4)]">
-              <defs>
-                <linearGradient id="loader-grad1" x1="171" y1="116" x2="441" y2="196" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#00C6FF"/>
-                  <stop offset="1" stopColor="#0072FF"/>
-                </linearGradient>
-                <linearGradient id="loader-grad2" x1="71" y1="216" x2="361" y2="396" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#0072FF"/>
-                  <stop offset="1" stopColor="#001F8F"/>
-                </linearGradient>
-              </defs>
-              
-              {/* Top Bar of 'F' */}
-              <motion.path 
-                d="M211 116 H441 L401 196 H171 Z" 
-                stroke="url(#loader-grad1)"
-                strokeWidth="4"
-                initial={{ pathLength: 0, fill: "rgba(0,198,255,0)" }}
-                animate={{ pathLength: 1, fill: "url(#loader-grad1)" }}
-                transition={{ 
-                  pathLength: { duration: 1, ease: "easeInOut" },
-                  fill: { delay: 0.5, duration: 0.8, ease: "easeIn" }
-                }}
-              />
-              
-              {/* Bottom Stem of 'F' */}
-              <motion.path 
-                d="M161 216 H361 L331 276 H191 L131 396 H71 Z" 
-                stroke="url(#loader-grad2)"
-                strokeWidth="4"
-                initial={{ pathLength: 0, fill: "rgba(0,114,255,0)" }}
-                animate={{ pathLength: 1, fill: "url(#loader-grad2)" }}
-                transition={{ 
-                  pathLength: { duration: 1, ease: "easeInOut", delay: 0.2 },
-                  fill: { delay: 0.7, duration: 0.8, ease: "easeIn" }
-                }}
-              />
-            </svg>
+            {/* The Actual Image Logo */}
+            <motion.div
+               initial={{ scale: 0.8, opacity: 0, filter: "blur(10px)" }}
+               animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+               transition={{ duration: 1, ease: "easeOut" }}
+            >
+               {/* 
+                 Place your actual logo file in the 'public' folder and name it 'logo.png' 
+                 (e.g., c:\Users\Aryan\Desktop\forb\public\logo.png) 
+               */}
+               <img 
+                 src="/logo.png" 
+                 alt="ForbTech Logo" 
+                 className="w-32 md:w-40 h-auto mb-6 drop-shadow-[0_0_30px_rgba(0,198,255,0.4)]"
+                 // Fallback if logo.png isn't found yet
+                 onError={(e) => {
+                   (e.target as HTMLImageElement).style.display = 'none';
+                 }}
+               />
+            </motion.div>
 
             {/* Text Reveal */}
             <div className="overflow-hidden">
