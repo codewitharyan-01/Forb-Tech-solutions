@@ -72,9 +72,10 @@ export function Footer() {
           
           <div className="flex flex-col items-center md:items-start gap-4">
             <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-background/30">Company</span>
-            <div className="flex gap-6">
+            <div className="flex gap-4 md:gap-6 flex-wrap justify-center md:justify-start">
               <Link href="/about" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">About Us</Link>
               <Link href="/careers" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">Careers</Link>
+              <Link href="/testimonials" className="relative text-sm font-semibold hover:text-primary transition-colors after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-primary hover:after:w-full after:transition-all after:duration-300">Client Success</Link>
             </div>
           </div>
 

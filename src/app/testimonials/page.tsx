@@ -5,46 +5,46 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah Jenkins",
-    role: "CTO, FinTech Global",
-    review: "ForbTech completely transformed our legacy infrastructure. Their team seamlessly migrated our core banking systems to a scalable, zero-downtime AWS architecture. The level of engineering excellence is unmatched.",
+    name: "Wispa AI Team",
+    role: "Founders, Wispa AI",
+    review: "ForbTech took our SSIP Phase 1 concept and turned it into a stunning startup prototype. Their execution was flawless, delivering a high-quality product that perfectly matched our vision and requirements.",
     rating: 5,
-    highlight: "Zero-Downtime Migration"
+    highlight: "Rapid Prototyping"
   },
   {
-    name: "Michael Chen",
-    role: "Founder, E-Commerce Pro",
-    review: "We hired ForbTech to build our custom Next.js storefront. Our page load speeds dropped from 3 seconds to under 400ms, and our conversion rate jumped by 35% in the first month. Incredible attention to detail.",
+    name: "CivicWorks Admin",
+    role: "Director, Smart City Portal",
+    review: "The award-winning Smart City civic portal built by ForbTech is incredibly robust. They handled complex integrations and delivered a secure, highly scalable platform that serves our community flawlessly.",
     rating: 5,
-    highlight: "35% Conversion Increase"
+    highlight: "Award Winning Portal"
   },
   {
-    name: "David Althaus",
-    role: "VP of Engineering, HealthSync",
-    review: "The custom AI solution they engineered for our data triage workflow saved our analysts 40 hours a week. They don't just write code; they deeply understand business logic and deliver systems that actually drive ROI.",
+    name: "Life Fitness Gym",
+    role: "Management, Life Fitness",
+    review: "Our custom gym management web app has completely streamlined our daily operations. From member tracking to billing, ForbTech built an incredibly intuitive system that saves us hours every single day.",
     rating: 5,
-    highlight: "Automated 40hrs/week"
+    highlight: "Operational Efficiency"
   },
   {
-    name: "Elena Rodriguez",
-    role: "Director of IT, CivicWorks",
-    review: "Security and compliance were our top priorities when building our new civic portal. ForbTech delivered a robust, highly secure role-based access platform that passed all our internal security audits with flying colors.",
+    name: "Empire 799",
+    role: "E-Commerce Operations",
+    review: "ForbTech delivered a beautiful, high-converting digital storefront for Empire 799. The site is lightning fast, highly secure, and provides a seamless shopping experience for our customers.",
     rating: 5,
-    highlight: "Enterprise Security"
+    highlight: "E-Commerce Growth"
   },
   {
-    name: "James Westbrook",
-    role: "CEO, Nexa Logistics",
-    review: "We needed a complete UX/UI overhaul of our logistics dashboard. ForbTech designed a pixel-perfect, highly intuitive interface that our dispatchers love using. It cut our onboarding time in half.",
+    name: "Anaya Dental Care",
+    role: "Clinic Management",
+    review: "Our new healthcare website is professional, fast, and exactly what we needed to build trust with our patients. ForbTech's attention to detail and clean design principles are unmatched.",
     rating: 5,
-    highlight: "Pixel-Perfect UI"
+    highlight: "Professional Branding"
   },
   {
-    name: "Anita Sharma",
-    role: "Product Manager, AI Start",
-    review: "Working with the ForbTech team is like having an elite in-house engineering team. They are proactive, transparent, and always push the technical boundaries to deliver the absolute best product.",
+    name: "Rajvi Khaman",
+    role: "Owner, Rajvi Khaman",
+    review: "We needed a strong digital presence to elevate our food brand. ForbTech delivered exceptional branding and a modern website that perfectly captures the essence of our business.",
     rating: 5,
-    highlight: "Elite Engineering"
+    highlight: "Exceptional Branding"
   }
 ];
 

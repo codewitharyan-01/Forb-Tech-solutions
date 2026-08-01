@@ -99,7 +99,8 @@ export function Navbar() {
     pathname.includes("about") ? "About Us" :
     pathname.includes("careers") ? "Careers" :
     pathname.includes("privacy") ? "Privacy Policy" :
-    pathname.includes("terms") ? "Terms of Service" : "Page"
+    pathname.includes("terms") ? "Terms of Service" :
+    pathname.includes("testimonials") ? "Client Feedback" : "Page"
   );
   
   const whatsappUrl = "https://wa.me/919023668571?text=Hello%20ForbTech!%20I'm%20interested%20in%20starting%20a%20new%20project.%20Can%20we%20discuss%20my%20requirements%3F";
