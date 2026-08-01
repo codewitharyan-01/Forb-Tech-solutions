@@ -5,6 +5,7 @@ import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvide
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/ui/Loader";
+import { GlobalContactModal } from "@/components/ui/GlobalContactModal";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
             </div>
             
             <Loader />
+            <GlobalContactModal />
             <Navbar />
             <main className="flex-1">{children}</main>
             <div className="px-4 md:px-8 pb-4 md:pb-8 mt-8">
