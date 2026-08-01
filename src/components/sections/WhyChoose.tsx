@@ -3,14 +3,14 @@
 import { CheckCircle2 } from "lucide-react"
 
 const reasons = [
-  "Custom Software Tailored to Your Business Goals",
-  "Award-Winning Engineering & UI/UX Design",
-  "Enterprise-Grade Security & Scalability Built-In",
-  "Seamless Cloud Integrations (AWS & Azure)",
-  "Lightning Fast Web Apps Powered by Next.js",
-  "Dedicated 24/7 Technical Support & Maintenance",
-  "100% Transparent Communication & Agile Workflows",
-  "AI-Powered Automations to Save 40+ Hours a Week"
+  "Custom Web Application Development",
+  "Responsive & Modern UI/UX Design",
+  "Full-Stack Engineering Team",
+  "Scalable Digital Solutions for Businesses",
+  "Fast, Secure, & Optimized Codebases",
+  "API Development & Third-Party Integrations",
+  "Reliable Tech Maintenance & Support",
+  "Turning Complex Ideas into Functional Software"
 ]
 
 export function WhyChoose() {
