@@ -191,8 +191,8 @@ export function Navbar() {
                   [
                     { label: 'Services', href: '/#services' },
                     { label: 'Process', href: '/#process' },
-                    { label: 'Ecosystem', href: '/#ecosystem' },
-                    { label: 'Our Work', href: '/#work' }
+                    { label: 'Our Work', href: '/#work' },
+                    { label: 'Client Success', href: '/testimonials' }
                   ].map((item, i) => (
                     <Link 
                       key={i}
@@ -204,13 +204,24 @@ export function Navbar() {
                     </Link>
                   ))
                 ) : (
-                  <Link 
-                    href="/"
-                    onClick={() => setMenuOpen(false)}
-                    className="text-4xl md:text-6xl font-black tracking-tighter hover:text-primary hover:translate-x-4 transition-all duration-300 block w-max"
-                  >
-                    Back to Home
-                  </Link>
+                  <>
+                    <Link 
+                      href="/"
+                      onClick={() => setMenuOpen(false)}
+                      className="text-4xl md:text-6xl font-black tracking-tighter hover:text-primary hover:translate-x-4 transition-all duration-300 block w-max mb-2"
+                    >
+                      Home
+                    </Link>
+                    {pathname !== "/testimonials" && (
+                      <Link 
+                        href="/testimonials"
+                        onClick={() => setMenuOpen(false)}
+                        className="text-4xl md:text-6xl font-black tracking-tighter hover:text-primary hover:translate-x-4 transition-all duration-300 block w-max"
+                      >
+                        Client Success
+                      </Link>
+                    )}
+                  </>
                 )}
               </motion.div>
 
