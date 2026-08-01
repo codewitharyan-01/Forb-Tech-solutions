@@ -195,15 +195,25 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="flex items-center gap-10">
-              <div className="flex flex-col sm:text-right">
-                <span className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-1">15+</span>
+            <div className="flex items-center gap-6 md:gap-10 overflow-x-auto pb-4 sm:pb-0 scrollbar-hide w-full sm:w-auto">
+              <div className="flex flex-col shrink-0">
+                <span className="text-2xl md:text-4xl font-black tracking-tight leading-none mb-1 text-primary">15+</span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Projects</span>
               </div>
-              <div className="w-px h-12 bg-foreground/10 hidden sm:block" />
-              <div className="flex flex-col text-left">
-                <span className="text-3xl md:text-4xl font-black tracking-tight leading-none mb-1 text-primary">#1</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Univ Rank</span>
+              <div className="w-px h-8 md:h-12 bg-foreground/10 shrink-0" />
+              <div className="flex flex-col shrink-0">
+                <span className="text-2xl md:text-4xl font-black tracking-tight leading-none mb-1">5/5</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Client Rating</span>
+              </div>
+              <div className="w-px h-8 md:h-12 bg-foreground/10 shrink-0" />
+              <div className="flex flex-col shrink-0">
+                <span className="text-2xl md:text-4xl font-black tracking-tight leading-none mb-1">99.9%</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Uptime</span>
+              </div>
+              <div className="w-px h-8 md:h-12 bg-foreground/10 shrink-0 hidden sm:block" />
+              <div className="flex flex-col shrink-0 hidden sm:flex">
+                <span className="text-2xl md:text-4xl font-black tracking-tight leading-none mb-1 text-primary">Zero</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Breaches</span>
               </div>
             </div>
           </motion.div>
@@ -216,7 +226,7 @@ export function Hero() {
             className="flex flex-col gap-2 md:gap-4"
           >
             <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-muted-foreground ml-1 md:ml-2">
-              I Build
+              We Build
             </span>
             <div className="relative h-[3.5rem] md:h-[7.5rem] overflow-hidden -ml-1 md:-ml-2">
               <motion.span
@@ -255,7 +265,7 @@ export function Hero() {
           >
             <div className="lg:col-span-4">
               <p className="text-base md:text-lg font-medium text-muted-foreground leading-relaxed max-w-sm">
-                I help businesses transform ideas into powerful digital products — from concept to launch, end-to-end.
+                We help businesses transform ideas into powerful digital products — from concept to launch, end-to-end.
               </p>
             </div>
 
