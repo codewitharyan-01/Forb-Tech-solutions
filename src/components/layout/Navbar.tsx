@@ -126,6 +126,16 @@ export function Navbar() {
               <Logo className={`h-6 md:h-7 transition-colors duration-300 ${menuOpen ? 'text-foreground' : ''}`} />
             </Link>
           </div>
+
+          {/* Back Home Button (Only on inner pages) */}
+          {!isHome && (
+            <Link 
+              href="/" 
+              className={`hidden sm:flex items-center gap-2 transition-all duration-500 rounded-full border px-4 py-2.5 ${isScrolled && !menuOpen ? 'bg-background/80 backdrop-blur-xl border-border/50 shadow-lg' : 'bg-background/40 backdrop-blur-md border-border/20 shadow-sm'} hover:bg-foreground hover:text-background hover:scale-105 group`}
+            >
+               <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest transition-transform group-hover:-translate-x-1">← Home</span>
+            </Link>
+          )}
         </div>
 
         {/* Right: Active Section & Mobile Menu */}
