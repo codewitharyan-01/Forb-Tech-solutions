@@ -1,12 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { CheckCircle2 } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const rotatingWords = ["Websites", "Mobile Apps", "AI Solutions", "E-Commerce", "SaaS Products"];
-
-
+const rotatingTaglines = [
+  "From Idea to Innovation",
+  "Engineering the Future",
+  "Scalable Digital Solutions",
+  "Next-Gen Tech Consulting"
+];
 
 const WireframeCube = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5" strokeLinejoin="round" className={className}>
@@ -76,12 +80,21 @@ const WireframeOctahedron = ({ className }: { className?: string }) => (
 
 export function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
+  const [taglineIndex, setTaglineIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const wordInterval = setInterval(() => {
       setWordIndex((prev) => (prev + 1) % rotatingWords.length);
     }, 2500);
-    return () => clearInterval(interval);
+    
+    const taglineInterval = setInterval(() => {
+      setTaglineIndex((prev) => (prev + 1) % rotatingTaglines.length);
+    }, 15000);
+
+    return () => {
+      clearInterval(wordInterval);
+      clearInterval(taglineInterval);
+    };
   }, []);
 
   return (
@@ -164,9 +177,22 @@ export function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8"
           >
-            <div className="inline-flex items-center gap-3 border border-foreground/10 rounded-full px-5 py-2.5 bg-background/60 backdrop-blur-md shadow-sm">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Available for projects</span>
+            <div className="inline-flex items-center gap-3 border border-foreground/10 rounded-full px-5 py-2.5 bg-background/60 backdrop-blur-md shadow-sm overflow-hidden relative min-w-[240px] md:min-w-[280px]">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
+              <div className="relative h-[1.2em] w-full flex items-center">
+                <AnimatePresence mode="popLayout">
+                  <motion.span
+                    key={taglineIndex}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute left-0 text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] whitespace-nowrap text-foreground/80"
+                  >
+                    {rotatingTaglines[taglineIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
             </div>
 
             <div className="flex items-center gap-10">
