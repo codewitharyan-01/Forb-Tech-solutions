@@ -28,12 +28,15 @@ export async function POST(req: Request) {
       cache: "no-store"
     });
 
-    if (!getRes.ok) {
+    let sha: string | undefined = undefined;
+
+    if (getRes.ok) {
+      const getResData = await getRes.json();
+      sha = getResData.sha;
+    } else if (getRes.status !== 404) {
+      // If it's not a 404 (file doesn't exist yet), then it's a real error
       return NextResponse.json({ error: "Failed to fetch file from GitHub" }, { status: 500 });
     }
-
-    const getResData = await getRes.json();
-    const sha = getResData.sha;
 
     // 2. Commit new file
     const contentEncoded = Buffer.from(JSON.stringify(newContent, null, 2)).toString("base64");
