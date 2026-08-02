@@ -13,7 +13,9 @@ export function Logo({ className = "", iconOnly = false }: LogoProps) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();
 
-  const handleLogoClick = () => {
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
     const newCount = clicks + 1;
     setClicks(newCount);
 
@@ -22,6 +24,11 @@ export function Logo({ className = "", iconOnly = false }: LogoProps) {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       router.push("/hq");
       return;
+    }
+
+    // On the first click, navigate home immediately so it functions as a normal logo link
+    if (newCount === 1) {
+      router.push("/");
     }
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);

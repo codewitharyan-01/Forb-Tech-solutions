@@ -122,9 +122,9 @@ export function Navbar() {
         <div className="pointer-events-auto flex items-center gap-2 z-[101]">
           {/* Logo Capsule */}
           <div className={`transition-all duration-500 rounded-full border px-5 py-2.5 ${isScrolled && !menuOpen ? 'bg-background/80 backdrop-blur-xl border-border/50 shadow-lg' : 'bg-background/40 backdrop-blur-md border-border/20 shadow-sm'}`}>
-            <Link href="/" className="block">
+            <div className="block">
               <Logo className={`h-6 md:h-7 transition-colors duration-300 ${menuOpen ? 'text-foreground' : ''}`} />
-            </Link>
+            </div>
           </div>
 
           {/* Back Home Button (Only on inner pages) */}
