@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { password, newContent } = await req.json();
+    const { password, newContent, dataType } = await req.json();
     
     // Auth Check
     if (password !== process.env.ADMIN_PASSWORD) {
@@ -14,9 +14,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "GITHUB_TOKEN not set on server" }, { status: 500 });
     }
 
+    let filePath = "src/data/projects.json";
+    if (dataType === "config") filePath = "src/data/config.json";
+    if (dataType === "team") filePath = "src/data/team.json";
+    if (dataType === "services") filePath = "src/data/services.json";
+    if (dataType === "testimonials") filePath = "src/data/testimonials.json";
+
     const repoOwner = "codewitharyan-01";
     const repoName = "Forb-Tech-solutions";
-    const filePath = "src/data/projects.json";
 
     // 1. Get current file SHA
     const getRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {

@@ -9,38 +9,48 @@ interface LogoProps {
 }
 
 export function Logo({ className = "", iconOnly = false }: LogoProps) {
-  const [clicks, setClicks] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();
+  const hasTriggeredHQ = useRef(false);
 
-  const handleLogoClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    
-    const newCount = clicks + 1;
-    setClicks(newCount);
-
-    if (newCount >= 5) {
-      setClicks(0);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  const handleStart = () => {
+    hasTriggeredHQ.current = false;
+    timeoutRef.current = setTimeout(() => {
+      hasTriggeredHQ.current = true;
       router.push("/hq");
+    }, 3000); // 3 seconds hold
+  };
+
+  const handleEnd = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    
+    if (hasTriggeredHQ.current) {
+      hasTriggeredHQ.current = false;
       return;
     }
-
-    // On the first click, navigate home immediately so it functions as a normal logo link
-    if (newCount === 1) {
-      router.push("/");
-    }
-
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setClicks(0);
-    }, 2000); // 2-second window to tap 5 times
+    
+    router.push("/");
   };
 
   return (
     <div 
       className={`flex items-center gap-3 select-none cursor-pointer ${className}`}
-      onClick={handleLogoClick}
+      onMouseDown={handleStart}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleEnd}
+      onTouchStart={handleStart}
+      onTouchEnd={handleEnd}
+      onTouchCancel={handleEnd}
+      onContextMenu={(e) => e.preventDefault()}
+      onClick={handleClick}
+      style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
     >
       
       {/* Scalable SVG Icon */}

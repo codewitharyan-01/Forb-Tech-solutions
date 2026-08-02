@@ -5,6 +5,7 @@ import { Globe, Mail, Phone } from "lucide-react";
 import { NetworkBackground } from "@/components/ui/NetworkBackground";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import siteConfig from "@/data/config.json";
 
 const WORDS = ["amazing", "extraordinary", "revolutionary", "visionary", "next-gen"];
 
@@ -18,7 +19,7 @@ export function Footer() {
     return () => clearInterval(interval);
   }, []);
 
-  const whatsappUrl = "https://wa.me/919023668571?text=Hello%20ForbTech!%20I'm%20interested%20in%20starting%20a%20new%20project.%20Can%20we%20discuss%20my%20requirements%3F";
+  const whatsappUrl = `https://wa.me/${siteConfig.contactWhatsApp}?text=Hello%20ForbTech!%20I'm%20interested%20in%20starting%20a%20new%20project.%20Can%20we%20discuss%20my%20requirements%3F`;
 
   return (
     <footer className="w-full bg-foreground text-background overflow-hidden relative">
@@ -97,7 +98,7 @@ export function Footer() {
               <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Twitter / X">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
               </a>
-              <a href="mailto:forbteck@gmail.com" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Email Us">
+              <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Email Us">
                 <Mail strokeWidth={1.2} className="w-5 h-5" />
               </a>
             </div>

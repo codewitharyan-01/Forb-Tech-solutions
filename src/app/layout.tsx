@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/ui/Loader";
 import { GlobalContactModal } from "@/components/ui/GlobalContactModal";
+import siteConfig from "@/data/config.json";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -13,12 +14,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ForbTech | Elite Engineering & Digital Solutions",
-  description: "Partner with ForbTech's elite engineering team to build custom software, websites, AI solutions, and scalable digital products that accelerate business growth.",
+  title: siteConfig.seoTitle,
+  description: siteConfig.seoDescription,
   keywords: ["Software Development Agency", "Custom Web Apps", "AI Solutions", "Tech Agency", "Web Design"],
   openGraph: {
-    title: "ForbTech | Elite Engineering & Digital Solutions",
-    description: "Partner with our elite engineering team to build scalable digital products, websites, and AI solutions.",
+    title: siteConfig.seoTitle,
+    description: siteConfig.seoDescription,
     url: "https://forb-tech-solutions.vercel.app",
     siteName: "ForbTech",
     images: [
@@ -34,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ForbTech | Elite Engineering & Digital Solutions",
-    description: "Partner with our elite engineering team to build scalable digital products, websites, and AI solutions.",
+    title: siteConfig.seoTitle,
+    description: siteConfig.seoDescription,
     images: ["/og-image.png"],
   },
 };
