@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const projects = [
@@ -16,10 +16,18 @@ const projects = [
 export function FeaturedWork() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Track the scroll progress of the entire section
+  // Track the raw scroll progress
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
+  });
+
+  // Smooth out the scroll progress with physical spring physics
+  // This prevents the stack from flying away instantly if the user scrolls too fast
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,   // How tight the spring is (lower = slower response)
+    damping: 25,     // How much friction is applied (higher = less bouncy, smoother stop)
+    restDelta: 0.001
   });
 
   return (
@@ -27,7 +35,7 @@ export function FeaturedWork() {
       id="work" 
       ref={containerRef}
       className="relative bg-background z-10"
-      style={{ height: `${(projects.length + 1) * 75}vh` }} // Massively increased scroll space so cards peel away slowly
+      style={{ height: `${(projects.length + 1) * 75}vh` }} // Massively increased scroll space
     >
       <div className="sticky top-[7.5vh] h-[85vh] w-full flex flex-col justify-center overflow-hidden py-8 md:py-12">
         
@@ -40,7 +48,7 @@ export function FeaturedWork() {
                 item={item} 
                 index={index} 
                 totalCards={array.length} 
-                scrollYProgress={scrollYProgress} 
+                scrollYProgress={smoothProgress} 
               />
             );
           })}
