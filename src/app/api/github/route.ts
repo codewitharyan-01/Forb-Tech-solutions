@@ -19,6 +19,9 @@ export async function POST(req: Request) {
     if (dataType === "team") filePath = "src/data/team.json";
     if (dataType === "services") filePath = "src/data/services.json";
     if (dataType === "testimonials") filePath = "src/data/testimonials.json";
+    if (dataType === "socials") filePath = "src/data/socials.json";
+    if (dataType === "careers") filePath = "src/data/careers.json";
+    if (dataType === "leads") filePath = "src/data/leads.json";
 
     const repoOwner = "codewitharyan-01";
     const repoName = "Forb-Tech-solutions";

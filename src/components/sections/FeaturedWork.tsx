@@ -17,14 +17,6 @@ export function FeaturedWork() {
     offset: ["start start", "end end"],
   });
 
-  // Smooth out the scroll progress with physical spring physics
-  // This prevents the stack from flying away instantly if the user scrolls too fast
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,   // How tight the spring is (lower = slower response)
-    damping: 25,     // How much friction is applied (higher = less bouncy, smoother stop)
-    restDelta: 0.001
-  });
-
   return (
     <section 
       id="work" 
@@ -43,7 +35,7 @@ export function FeaturedWork() {
                 item={item} 
                 index={index} 
                 totalCards={array.length} 
-                scrollYProgress={smoothProgress} 
+                scrollYProgress={scrollYProgress} 
               />
             );
           })}

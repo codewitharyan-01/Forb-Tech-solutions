@@ -7,14 +7,15 @@ import { Logo } from "@/components/ui/Logo"
 import { MapPin, ArrowUpRight, Globe, Smartphone, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import siteConfig from "@/data/config.json"
 
 const menuVariants: Variants = {
   closed: {
     clipPath: "circle(0% at calc(100% - 3rem) 3rem)",
     transition: {
       type: "spring",
-      stiffness: 400,
-      damping: 40
+      stiffness: 20,
+      restDelta: 2
     }
   },
   open: {
@@ -115,9 +116,24 @@ export function Navbar() {
 
   return (
     <>
+      {/* Announcement Banner */}
+      <AnimatePresence>
+        {siteConfig.announcementActive && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }} 
+            animate={{ height: "auto", opacity: 1 }} 
+            exit={{ height: 0, opacity: 0 }}
+            className="w-full bg-primary text-primary-foreground text-center py-2 px-4 text-[10px] md:text-xs font-bold uppercase tracking-widest fixed top-0 z-[200] flex items-center justify-center gap-2"
+          >
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            {siteConfig.announcementText}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Disjointed Floating Dock Header */}
       <motion.header 
-        className="fixed top-6 left-4 right-4 md:left-8 md:right-8 z-[100] pointer-events-none flex items-center justify-between"
+        className={`fixed ${siteConfig.announcementActive ? 'top-12' : 'top-6'} left-4 right-4 md:left-8 md:right-8 z-[100] pointer-events-none flex items-center justify-between transition-all duration-300`}
       >
         <div className="pointer-events-auto flex items-center gap-2 z-[101]">
           {/* Logo Capsule */}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "soc-1",
+    "platform": "YouTube",
+    "url": "https://youtube.com/"
+  },
+  {
+    "id": "soc-2",
+    "platform": "Website",
+    "url": "https://forb-tech-solutions.vercel.app/"
+  },
+  {
+    "id": "soc-3",
+    "platform": "LinkedIn",
+    "url": "https://linkedin.com/"
+  },
+  {
+    "id": "soc-4",
+    "platform": "Twitter",
+    "url": "https://twitter.com/"
+  }
+]

@@ -6,6 +6,26 @@ import { NetworkBackground } from "@/components/ui/NetworkBackground";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import siteConfig from "@/data/config.json";
+import socialsData from "@/data/socials.json";
+
+const getSocialIcon = (platform: string) => {
+  switch (platform) {
+    case "LinkedIn": 
+      return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>;
+    case "Twitter": 
+      return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>;
+    case "YouTube": 
+      return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.547 12 3.547 12 3.547s-7.505 0-9.377.503a3.015 3.015 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.503 9.377.503 9.377.503s7.505 0 9.377-.503a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>;
+    case "Instagram": 
+      return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>;
+    case "Facebook": 
+      return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>;
+    case "GitHub": 
+      return <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>;
+    default: 
+      return <Globe strokeWidth={1.2} className="w-5 h-5" />;
+  }
+};
 
 const WORDS = ["amazing", "extraordinary", "revolutionary", "visionary", "next-gen"];
 
@@ -84,20 +104,13 @@ export function Footer() {
             <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-background/30">Connect</span>
             <div className="flex gap-5 text-background/80">
               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="WhatsApp">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 0C5.393 0 0 5.393 0 12.031c0 2.12.553 4.195 1.6 6.01L.23 23.768l5.885-1.543a12.031 12.031 0 0 0 5.916 1.543h.005c6.636 0 12.031-5.394 12.031-12.031S18.667 0 12.031 0zm0 21.727h-.005a10.021 10.021 0 0 1-5.111-1.393l-.367-.217-3.799.996.996-3.799-.217-.367a10.015 10.015 0 0 1-1.4-5.234c0-5.523 4.496-10.019 10.02-10.019s10.019 4.496 10.019 10.019-4.496 10.02-10.02 10.02zm5.502-7.513c-.302-.15-1.787-.882-2.064-.984-.277-.101-.479-.15-.681.15-.202.302-.781.984-.958 1.186-.176.202-.353.226-.655.076-2.155-1.085-3.565-2.05-4.947-4.43-.127-.222-.014-.343.137-.494.135-.136.302-.353.453-.529.15-.176.201-.302.302-.503.1-.202.05-.378-.025-.529-.076-.15-.681-1.637-.933-2.242-.246-.59-.496-.51-.681-.519-.176-.009-.378-.009-.579-.009-.202 0-.529.076-.806.378-.277.302-1.058 1.033-1.058 2.52 0 1.487 1.083 2.924 1.234 3.125.151.201 2.13 3.25 5.161 4.558 2.053.886 2.802.946 3.829.794 1.14-.17 3.019-1.233 3.447-2.423.428-1.19.428-2.21.302-2.423-.126-.213-.478-.34-.78-.491z" /></svg>
+                <Phone strokeWidth={1.2} className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="YouTube">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.547 12 3.547 12 3.547s-7.505 0-9.377.503a3.015 3.015 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.503 9.377.503 9.377.503s7.505 0 9.377-.503a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-              </a>
-              <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Website">
-                <Globe strokeWidth={1.2} className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-              </a>
-              <a href="#" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Twitter / X">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-              </a>
+              {socialsData.map((soc) => (
+                <a key={soc.id} href={soc.url} target="_blank" rel="noreferrer" className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title={soc.platform}>
+                  {getSocialIcon(soc.platform)}
+                </a>
+              ))}
               <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-primary hover:-translate-y-1 hover:scale-110 transition-all duration-300" title="Email Us">
                 <Mail strokeWidth={1.2} className="w-5 h-5" />
               </a>
@@ -110,20 +123,16 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="w-full flex flex-row justify-between items-center gap-2 md:gap-4 text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-background/50 pt-6 border-t border-background/10"
+          className="w-full flex flex-col md:flex-row justify-between items-center gap-4 text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest text-background/50 pt-6 border-t border-background/10"
         >
-          <span className="w-auto text-left whitespace-nowrap hover:text-background transition-colors">© {new Date().getFullYear()} FORBTECH</span>
+          <div className="flex flex-col gap-1 items-center md:items-start text-center md:text-left">
+            <span className="hover:text-background transition-colors">© 2026 FORBTECH</span>
+            <a href="https://portfolio-by-aryan.netlify.app/" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors duration-300">
+              Founder - Aryan
+            </a>
+          </div>
           
-          <a 
-            href="https://portfolio-by-aryan.netlify.app/" 
-            target="_blank" 
-            rel="noreferrer"
-            className="w-auto text-center whitespace-nowrap hover:text-primary transition-colors duration-300"
-          >
-            Founder - Aryan
-          </a>
-          
-          <div className="w-auto flex justify-end gap-2 md:gap-6 whitespace-nowrap">
+          <div className="w-auto flex justify-end gap-2 md:gap-6 whitespace-nowrap mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-background transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-background transition-colors">Terms</Link>
           </div>

@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/ui/Loader";
-import { GlobalContactModal } from "@/components/ui/GlobalContactModal";
 import siteConfig from "@/data/config.json";
 
 const inter = Inter({
@@ -92,6 +89,11 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            --primary: ${siteConfig.primaryColor || '#2563eb'};
+          }
+        `}} />
         <SmoothScrollProvider>
           <div className="relative flex min-h-screen flex-col overflow-clip bg-muted/20">
             {/* Global Creative Background (Lowest Layer) */}
@@ -102,14 +104,7 @@ export default function RootLayout({
             </div>
             
             <Loader />
-            <GlobalContactModal />
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <div className="px-4 md:px-8 pb-4 md:pb-8 mt-8">
-              <div className="rounded-[3rem] bg-background/90 backdrop-blur-md shadow-xl overflow-hidden border border-border/50 relative z-10" style={{ transform: "translateZ(0)" }}>
-                <Footer />
-              </div>
-            </div>
+            {children}
           </div>
         </SmoothScrollProvider>
       </body>
