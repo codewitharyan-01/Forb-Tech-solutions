@@ -92,9 +92,9 @@ function StackCard({
   const scaleValues = [1 - index * 0.05, 1, 1];
   const scale = useTransform(scrollYProgress, scaleProgress, scaleValues);
 
-  // Card Opacity: Fades in as it approaches top, fades out entirely as it flies away
+  // Card Opacity: Fades in as it approaches top, stays solid as it flies away to prevent text bleeding
   const opacityProgress = [0, Math.max(0.001, startAnim), endAnim];
-  const opacityValues = [1 - index * 0.15, 1, isLast ? 1 : 0];
+  const opacityValues = [1 - index * 0.1, 1, 1];
   const opacity = useTransform(scrollYProgress, opacityProgress, opacityValues);
 
   if (item.isIntro) {
@@ -145,12 +145,13 @@ function StackCard({
 
         {/* Centered Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10 pointer-events-none text-center">
-          <h3 className="text-3xl md:text-5xl lg:text-7xl font-black uppercase tracking-tight mb-2">
+          <h3 className="text-3xl md:text-5xl lg:text-7xl font-black uppercase tracking-tight mb-4 group-hover:scale-105 transition-transform duration-500">
             {item.name}
           </h3>
-          <p className="text-sm md:text-lg font-bold opacity-60">
-            Domain: {item.domain}
-          </p>
+          <span className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-xs font-black uppercase tracking-widest shadow-xl opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 transition-all duration-300">
+            View Live Site
+            <ArrowRight className="w-4 h-4" />
+          </span>
         </div>
 
         {/* Bottom Arrow */}
