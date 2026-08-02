@@ -135,7 +135,7 @@ function StackCard({
           <h3 className="text-3xl md:text-5xl lg:text-7xl font-black uppercase tracking-tight mb-4 group-hover:scale-105 transition-transform duration-500">
             {item.name}
           </h3>
-          <span className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-xs font-black uppercase tracking-widest shadow-xl opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-4 transition-all duration-300">
+          <span className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-xs font-black uppercase tracking-widest shadow-xl transition-transform duration-300 group-hover:scale-105 mt-2">
             View Live Site
             <ArrowRight className="w-4 h-4" />
           </span>

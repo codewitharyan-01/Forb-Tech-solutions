@@ -13,6 +13,9 @@ import testimonialsData from "@/data/testimonials.json";
 import socialsData from "@/data/socials.json";
 import careersData from "@/data/careers.json";
 import leadsData from "@/data/leads.json";
+import trafficData from "@/data/traffic.json";
+import seoData from "@/data/seo-pages.json";
+import blogsData from "@/data/blogs.json";
 
 export default function AdminHQ() {
   const router = useRouter();
@@ -31,6 +34,11 @@ export default function AdminHQ() {
   const [socials, setSocials] = useState(socialsData as any[]);
   const [careers, setCareers] = useState(careersData as any[]);
   const [leads, setLeads] = useState(leadsData as any[]);
+  const [traffic, setTraffic] = useState(trafficData as any[]);
+  const [seoPages, setSeoPages] = useState(seoData as any[]);
+  const [blogs, setBlogs] = useState(blogsData as any[]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationTopic, setGenerationTopic] = useState("");
   
   const [deployStatus, setDeployStatus] = useState("SYNC ALL CHANGES");
 
@@ -91,6 +99,9 @@ export default function AdminHQ() {
         { data: socials, type: "socials" },
         { data: careers, type: "careers" },
         { data: leads, type: "leads" },
+        { data: traffic, type: "traffic" },
+        { data: seoPages, type: "seo" },
+        { data: blogs, type: "blogs" },
       ];
 
       for (const ep of endpoints) {
@@ -109,6 +120,32 @@ export default function AdminHQ() {
       setTimeout(() => setDeployStatus("SYNC ALL CHANGES"), 4000);
     }
     setLoading(false);
+  };
+
+  const handleGenerateBlog = async (auto = false) => {
+    setIsGenerating(true);
+    setDeployStatus("GENERATING AI ARTICLE...");
+    try {
+      const topic = auto ? "The Future of Artificial Intelligence in Enterprise Software Architecture" : generationTopic;
+      const token = sessionStorage.getItem("admin_token");
+      const res = await fetch("/api/generate-news", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: token, topic })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setBlogs([data.blog, ...blogs]);
+        setGenerationTopic("");
+        setDeployStatus("ARTICLE GENERATED!");
+      } else {
+        setDeployStatus("GENERATION FAILED (Check API Key)");
+      }
+    } catch (e) {
+      setDeployStatus("ERROR");
+    }
+    setTimeout(() => setDeployStatus("SYNC ALL CHANGES"), 4000);
+    setIsGenerating(false);
   };
 
   const toggleSection = (section: string) => {
@@ -559,6 +596,148 @@ export default function AdminHQ() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+            {/* ============================== */}
+          {/* 9. B2B TRAFFIC INTEL           */}
+          {/* ============================== */}
+          <div>
+            <AccordionHeader title="B2B Traffic Intel" id="traffic" count={traffic.length} />
+            <AnimatePresence>
+              {openSection === "traffic" && (
+                <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
+                  <div className="p-6 bg-white/20 space-y-3 max-h-[500px] overflow-y-auto">
+                    {traffic.length === 0 ? (
+                      <div className="p-8 text-center text-black/40 text-xs font-bold uppercase tracking-widest border-2 border-dashed border-black/10 rounded-xl">
+                        No traffic logged yet.
+                      </div>
+                    ) : traffic.map((visit, idx) => (
+                      <div key={idx} className="flex flex-col gap-2 bg-white p-4 rounded-xl border border-black/5 shadow-sm">
+                        <div className="flex justify-between items-start">
+                          <h4 className="text-sm font-black text-primary">{visit.org}</h4>
+                          <span className="text-[10px] text-black/40 font-bold uppercase">{visit.timestamp}</span>
+                        </div>
+                        <div className="text-xs text-black/60 font-medium">
+                          <p>Location: {visit.location}</p>
+                          <p>IP Address: {visit.ip}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* ============================== */}
+          {/* 10. SEO ENGINE                 */}
+          {/* ============================== */}
+          <div>
+            <AccordionHeader title="Programmatic SEO Engine" id="seo" count={seoPages.length} />
+            <AnimatePresence>
+              {openSection === "seo" && (
+                <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
+                  <div className="p-6 bg-white/20 space-y-3">
+                    {seoPages.map((page, idx) => (
+                      <div key={idx} className="flex flex-col md:flex-row items-start md:items-center gap-3 bg-white p-4 rounded-xl border border-black/5 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex-1 w-full space-y-2">
+                          <div className="flex gap-2">
+                            <input value={page.service} onChange={(e) => { const n=[...seoPages]; n[idx].service=e.target.value; setSeoPages(n); }} placeholder="Service (e.g. Custom Software)" className="w-1/2 bg-black/5 border border-black/10 rounded-lg p-2 text-sm font-bold focus:outline-none" />
+                            <input value={page.location} onChange={(e) => { const n=[...seoPages]; n[idx].location=e.target.value; setSeoPages(n); }} placeholder="Location (e.g. New York)" className="w-1/2 bg-black/5 border border-black/10 rounded-lg p-2 text-sm focus:outline-none" />
+                          </div>
+                          <div className="text-[10px] text-black/40 font-mono bg-black/5 p-2 rounded-lg">
+                            Live Route: <span className="text-primary font-bold">/solutions/{(page.service || '').toLowerCase().replaceAll(' ', '-')}-in-{(page.location || '').toLowerCase().replaceAll(' ', '-')}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-4 self-end md:self-auto">
+                          <button 
+                            onClick={() => { const n=[...seoPages]; n[idx].active = !n[idx].active; setSeoPages(n); }}
+                            className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border transition-colors ${page.active ? 'bg-green-500/10 text-green-600 border-green-500/20' : 'bg-black/5 text-black/40 border-black/10'}`}
+                          >
+                            {page.active ? 'Live' : 'Draft'}
+                          </button>
+                          <button onClick={() => setSeoPages(seoPages.filter((_, i) => i !== idx))} className="text-black/20 hover:text-red-500 p-2 transition-colors">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    <button onClick={() => setSeoPages([...seoPages, { id: `seo-${Date.now()}`, service: "", location: "", active: true }])} className="w-full py-4 border-2 border-dashed border-black/10 rounded-xl hover:border-primary/50 hover:bg-primary/5 text-[10px] uppercase font-bold text-black/40 hover:text-primary transition-all flex items-center justify-center gap-2">
+                      <Plus className="w-4 h-4" /> Generate New SEO Page
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* ============================== */}
+          {/* 11. AI NEWSROOM                */}
+          {/* ============================== */}
+          <div>
+            <AccordionHeader title="Automated AI Newsroom" id="news" count={blogs.length} />
+            <AnimatePresence>
+              {openSection === "news" && (
+                <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
+                  <div className="p-6 bg-white/20 space-y-6">
+                    
+                    {/* AI Generator Controls */}
+                    <div className="bg-black/5 border border-black/10 rounded-xl p-5 space-y-4">
+                      <h3 className="text-xs font-black tracking-widest uppercase text-black/60">Generate New Article</h3>
+                      <div className="flex flex-col md:flex-row gap-3">
+                        <input 
+                          value={generationTopic} 
+                          onChange={(e) => setGenerationTopic(e.target.value)} 
+                          placeholder="Topic (e.g. Scaling Next.js Apps)" 
+                          className="flex-1 bg-white border border-black/10 rounded-lg p-3 text-sm focus:outline-none focus:border-primary" 
+                        />
+                        <button 
+                          onClick={() => handleGenerateBlog(false)} 
+                          disabled={isGenerating || !generationTopic}
+                          className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest disabled:opacity-50 transition-colors"
+                        >
+                          Write Custom
+                        </button>
+                        <button 
+                          onClick={() => handleGenerateBlog(true)} 
+                          disabled={isGenerating}
+                          className="bg-foreground hover:bg-foreground/90 text-background px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest disabled:opacity-50 transition-colors"
+                        >
+                          Auto-Generate Trending
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Blog List */}
+                    <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+                      {blogs.map((blog, idx) => (
+                        <div key={idx} className="bg-white p-4 rounded-xl border border-black/5 shadow-sm">
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="text-sm font-black tracking-tight">{blog.title}</h4>
+                            <div className="flex items-center gap-3 ml-4">
+                              <span className="text-[10px] uppercase font-bold text-black/40">{new Date(blog.date).toLocaleDateString()}</span>
+                              <button onClick={() => setBlogs(blogs.filter((_, i) => i !== idx))} className="text-black/20 hover:text-red-500 transition-colors">
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                          <p className="text-xs text-black/60 mb-2">{blog.excerpt}</p>
+                          <div className="flex items-center justify-between mt-4">
+                            <span className="text-[10px] bg-black/5 px-2 py-1 rounded text-black/50 font-mono">/news/{blog.slug}</span>
+                            <button 
+                              onClick={() => { const n=[...blogs]; n[idx].active = !n[idx].active; setBlogs(n); }}
+                              className={`text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border transition-colors ${blog.active ? 'bg-green-500/10 text-green-600 border-green-500/20' : 'bg-black/5 text-black/40 border-black/10'}`}
+                            >
+                              {blog.active ? 'Live' : 'Hidden'}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
                   </div>
                 </motion.div>
               )}

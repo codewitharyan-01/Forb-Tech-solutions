@@ -22,6 +22,9 @@ export async function POST(req: Request) {
     if (dataType === "socials") filePath = "src/data/socials.json";
     if (dataType === "careers") filePath = "src/data/careers.json";
     if (dataType === "leads") filePath = "src/data/leads.json";
+    if (dataType === "traffic") filePath = "src/data/traffic.json";
+    if (dataType === "seo") filePath = "src/data/seo-pages.json";
+    if (dataType === "blogs") filePath = "src/data/blogs.json";
 
     const repoOwner = "codewitharyan-01";
     const repoName = "Forb-Tech-solutions";
@@ -68,6 +71,16 @@ export async function POST(req: Request) {
       const errorData = await putRes.json();
       console.error("GitHub API Error:", errorData);
       return NextResponse.json({ error: "Failed to commit to GitHub" }, { status: 500 });
+    }
+
+    // Also write to local file system for local development sync
+    try {
+      const fs = require("fs/promises");
+      const path = require("path");
+      const localFilePath = path.join(process.cwd(), filePath);
+      await fs.writeFile(localFilePath, JSON.stringify(newContent, null, 2));
+    } catch (fsError) {
+      console.warn("Failed to write locally (expected in Vercel prod):", fsError);
     }
 
     return NextResponse.json({ success: true });

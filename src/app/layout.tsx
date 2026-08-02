@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { Loader } from "@/components/ui/Loader";
+import { Tracker } from "@/components/utils/Tracker";
 import siteConfig from "@/data/config.json";
 
 const inter = Inter({
@@ -36,6 +37,13 @@ export const metadata: Metadata = {
     description: siteConfig.seoDescription,
     images: ["/og-image.png"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 // JSON-LD Structured Data to strictly link the website to a Google Business Profile
@@ -89,6 +97,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <Tracker />
         <style dangerouslySetInnerHTML={{ __html: `
           :root {
             --primary: ${siteConfig.primaryColor || '#2563eb'};

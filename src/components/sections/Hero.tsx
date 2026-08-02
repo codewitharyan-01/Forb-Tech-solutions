@@ -78,7 +78,7 @@ const WireframeOctahedron = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export function Hero() {
+export function Hero({ seoService, seoLocation }: { seoService?: string, seoLocation?: string }) {
   const [wordIndex, setWordIndex] = useState(0);
   const [taglineIndex, setTaglineIndex] = useState(0);
 
@@ -225,35 +225,62 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="flex flex-col gap-2 md:gap-4"
           >
-            <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-muted-foreground ml-1 md:ml-2">
-              We Build
-            </span>
-            <div className="relative h-[3.5rem] md:h-[7.5rem] overflow-hidden -ml-1 md:-ml-2">
-              <motion.span
-                key={wordIndex}
-                initial={{ y: "100%", opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: "-100%", opacity: 0 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none text-primary"
-              >
-                {rotatingWords[wordIndex]}
-              </motion.span>
-            </div>
-            <div className="flex flex-wrap items-center gap-x-4 md:gap-x-6 -ml-1 md:-ml-2 mt-2 md:mt-4">
-              <span
-                className="text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none select-none opacity-80"
-                style={{
-                  WebkitTextStroke: '2px currentColor',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >
-                That Drive
-              </span>
-              <span className="text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none text-foreground">
-                Growth.
-              </span>
-            </div>
+            {seoService ? (
+              <>
+                <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-muted-foreground ml-1 md:ml-2">
+                  Top Rated In {seoLocation}
+                </span>
+                <h1 className="text-[3.5rem] md:text-[7rem] lg:text-[8rem] font-black tracking-tighter leading-none text-primary mt-2">
+                  {seoService}
+                </h1>
+                <div className="flex flex-wrap items-center gap-x-4 md:gap-x-6 -ml-1 md:-ml-2 mt-2 md:mt-4">
+                  <span
+                    className="text-[3.5rem] md:text-[6rem] lg:text-[7rem] font-black tracking-tighter leading-none select-none opacity-80"
+                    style={{
+                      WebkitTextStroke: '2px currentColor',
+                      WebkitTextFillColor: 'transparent'
+                    }}
+                  >
+                    Engineered For
+                  </span>
+                  <span className="text-[3.5rem] md:text-[6rem] lg:text-[7rem] font-black tracking-tighter leading-none text-foreground">
+                    Scale.
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] text-muted-foreground ml-1 md:ml-2">
+                  We Build
+                </span>
+                <div className="relative h-[3.5rem] md:h-[7.5rem] overflow-hidden -ml-1 md:-ml-2">
+                  <motion.span
+                    key={wordIndex}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: "-100%", opacity: 0 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none text-primary"
+                  >
+                    {rotatingWords[wordIndex]}
+                  </motion.span>
+                </div>
+                <div className="flex flex-wrap items-center gap-x-4 md:gap-x-6 -ml-1 md:-ml-2 mt-2 md:mt-4">
+                  <span
+                    className="text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none select-none opacity-80"
+                    style={{
+                      WebkitTextStroke: '2px currentColor',
+                      WebkitTextFillColor: 'transparent'
+                    }}
+                  >
+                    That Drive
+                  </span>
+                  <span className="text-[3.5rem] md:text-[8rem] lg:text-[9rem] font-black tracking-tighter leading-none text-foreground">
+                    Growth.
+                  </span>
+                </div>
+              </>
+            )}
           </motion.div>
 
           {/* Bottom Row: Description, Value Props, Buttons */}
