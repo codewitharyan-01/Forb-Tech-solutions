@@ -26,9 +26,6 @@ export function Industries() {
         {/* Header */}
         <div className="mb-16 text-center">
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 text-foreground">Domain <span className="text-primary">Expertise.</span></h2>
-          <p className="text-sm md:text-base font-medium text-muted-foreground max-w-xl mx-auto">
-            Tap an industry to expand its engineering profile.
-          </p>
         </div>
 
         {/* Dynamic Island Pills Container */}
@@ -54,7 +51,7 @@ export function Industries() {
                   animate={{ 
                     borderRadius: isActive ? 32 : 9999,
                   }}
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  transition={{ type: "spring", stiffness: 80, damping: 20, restDelta: 2 }}
                 >
                   
                   {/* INACTIVE STATE (The Pill) */}

@@ -84,9 +84,6 @@ export function Process() {
           
           <div className="mb-12 text-center">
             <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 text-foreground">Delivery <span className="text-primary">Methodology.</span></h2>
-            <p className="text-sm md:text-base font-medium text-muted-foreground max-w-xl mx-auto">
-              Scroll down to journey through our battle-tested engineering process.
-            </p>
           </div>
 
           <div className="flex flex-col gap-8 md:gap-12">
