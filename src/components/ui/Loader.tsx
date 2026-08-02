@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
+import { Logo } from "./Logo"
 
 export function Loader() {
   const [loading, setLoading] = useState(true)
@@ -60,33 +61,10 @@ export function Loader() {
                animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
                transition={{ duration: 1, ease: "easeOut" }}
             >
-               {/* 
-                 Place your actual logo file in the 'public' folder and name it 'logo.png' 
-                 (e.g., c:\Users\Aryan\Desktop\forb\public\logo.png) 
-               */}
-               <img 
-                 src="/logo.png" 
-                 alt="ForbTech Logo" 
-                 className="w-32 md:w-40 h-auto mb-6 drop-shadow-[0_0_30px_rgba(0,198,255,0.4)]"
-                 // Fallback if logo.png isn't found yet
-                 onError={(e) => {
-                   (e.target as HTMLImageElement).style.display = 'none';
-                 }}
-               />
+               <Logo iconOnly={true} className="h-24 md:h-32 mb-6 drop-shadow-[0_0_30px_rgba(0,198,255,0.4)]" />
             </motion.div>
 
-            {/* Text Reveal */}
-            <div className="overflow-hidden">
-              <motion.h1 
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ delay: 1, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-                className="text-2xl md:text-3xl font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#00C6FF] to-[#0072FF]"
-              >
-                ForbTech
-              </motion.h1>
-            </div>
-            
+
             {/* Loading Progress Bar */}
             <div className="w-48 h-[2px] bg-white/10 mt-6 overflow-hidden rounded-full relative">
               <motion.div 
