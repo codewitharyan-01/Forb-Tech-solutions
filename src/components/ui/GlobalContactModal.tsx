@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowRight } from "lucide-react";
+import { X, Sparkles } from "lucide-react";
 
 export function GlobalContactModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,143 +62,126 @@ export function GlobalContactModal() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8 pointer-events-auto overflow-hidden">
-          {/* Deep Black Backdrop with Blur */}
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6 pointer-events-auto">
+          {/* Solid Dark Overlay (No Blur) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             onClick={handleClose}
-            className="absolute inset-0 bg-black/90 backdrop-blur-xl"
+            className="absolute inset-0 bg-black/70"
           />
 
-          {/* High-Contrast White Monochrome Card */}
+          {/* Solid Matte iOS Modal Sheet */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", stiffness: 200, damping: 30 }}
-            className="relative w-full max-w-5xl bg-[#FAFAFA] text-black shadow-2xl flex flex-col md:flex-row overflow-hidden rounded-none md:rounded-[1rem]"
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+            className="relative w-full max-w-xl bg-[#1C1C1E] border border-[#2C2C2E] rounded-[2rem] shadow-2xl flex flex-col overflow-hidden"
           >
-            {/* Minimalist Close Button */}
-            <button 
-              onClick={handleClose}
-              className="absolute top-6 right-6 md:top-8 md:right-8 w-12 h-12 bg-black hover:bg-gray-800 rounded-full flex items-center justify-center text-white transition-transform hover:scale-110 z-50 shadow-lg"
-            >
-              <X className="w-6 h-6" strokeWidth={2} />
-            </button>
+            <div className="p-8 md:p-10 flex flex-col relative z-10">
+              
+              {/* iOS Close Button (top right) */}
+              <button 
+                onClick={handleClose}
+                className="absolute top-5 right-5 w-8 h-8 bg-[#2C2C2E] hover:bg-[#3A3A3C] rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="w-4 h-4" strokeWidth={2.5} />
+              </button>
 
-            {/* Left Side: Brutalist Typography */}
-            <div className="w-full md:w-5/12 p-8 md:p-14 flex flex-col justify-between border-b md:border-b-0 md:border-r border-gray-300">
-              <div className="relative z-10 mt-8 md:mt-0">
-                <div className="inline-block border-2 border-black px-4 py-2 text-xs font-black uppercase tracking-[0.2em] mb-10">
-                  Exclusive Partnership
-                </div>
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] mb-8 text-black">
-                  BOLD.<br/>
-                  RAW.<br/>
-                  SCALE.
-                </h2>
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed font-bold">
-                  We strip away the noise and engineer pure, high-performance digital solutions. 
-                </p>
-              </div>
-
-              <div className="relative z-10 mt-12 hidden md:block border-t-2 border-black pt-6">
-                <p className="text-xs uppercase tracking-widest font-black text-black">ForbTech Engineering</p>
-              </div>
-            </div>
-
-            {/* Right Side: High-Contrast Form */}
-            <div className="w-full md:w-7/12 p-8 md:p-14 relative z-10 flex flex-col justify-center bg-white">
               {isSubmitted ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center text-center h-full"
+                  className="flex flex-col items-center justify-center text-center py-12"
                 >
-                  <div className="w-20 h-20 bg-black rounded-none flex items-center justify-center mb-6">
-                    <ArrowRight className="w-10 h-10 text-white" />
+                  <div className="w-16 h-16 bg-[#007AFF] rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[#007AFF]/20">
+                    <Sparkles className="w-8 h-8 text-white" />
                   </div>
-                  <h4 className="text-4xl font-black tracking-tighter mb-3 text-black uppercase">Received.</h4>
-                  <p className="text-gray-600 font-bold text-lg max-w-[300px]">Our directors will be in contact very shortly.</p>
+                  <h4 className="text-2xl font-bold tracking-tight mb-2 text-white">Message Sent</h4>
+                  <p className="text-[#8E8E93] text-sm max-w-[250px] font-medium">Thank you for reaching out. Our team will review your project and get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="flex flex-col">
-                      <label className="text-xs font-black text-black uppercase tracking-widest mb-2 block">Full Name</label>
-                      <input 
-                        type="text" name="name" required
-                        className="w-full bg-gray-100 border-2 border-transparent focus:border-black rounded-none px-5 py-4 text-lg outline-none transition-all text-black font-bold placeholder:text-gray-400"
-                        placeholder="John Doe"
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <label className="text-xs font-black text-black uppercase tracking-widest mb-2 block">Email Address</label>
-                      <input 
-                        type="email" name="email" required
-                        className="w-full bg-gray-100 border-2 border-transparent focus:border-black rounded-none px-5 py-4 text-lg outline-none transition-all text-black font-bold placeholder:text-gray-400"
-                        placeholder="john@company.com"
-                      />
-                    </div>
+                <>
+                  {/* Apple-style Centered Copy */}
+                  <div className="text-center mb-8 px-4 mt-2">
+                    <h2 className="text-3xl font-bold tracking-tight text-white mb-3">
+                      Start a Project
+                    </h2>
+                    <p className="text-sm text-[#8E8E93] leading-relaxed font-medium">
+                      We'd love to help bring your ideas to life. Share a few details below, and let's build something beautiful together.
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="flex flex-col">
-                      <label className="text-xs font-black text-black uppercase tracking-widest mb-2 block">Phone Number</label>
-                      <input 
-                        type="tel" name="phone" required
-                        className="w-full bg-gray-100 border-2 border-transparent focus:border-black rounded-none px-5 py-4 text-lg outline-none transition-all text-black font-bold placeholder:text-gray-400"
-                        placeholder="+1 (555) 000-0000"
-                      />
-                    </div>
-
-                    <div className="flex flex-col relative">
-                      <label className="text-xs font-black text-black uppercase tracking-widest mb-2 block">Service Type</label>
-                      <select 
-                        name="project_type" required
-                        className="w-full bg-gray-100 border-2 border-transparent focus:border-black rounded-none px-5 py-4 text-lg outline-none transition-all text-black appearance-none cursor-pointer font-bold"
-                      >
-                        <option value="" disabled selected hidden className="text-gray-400">Select Service</option>
-                        <option value="Web Application">Web Application</option>
-                        <option value="Website Design">Website Design</option>
-                        <option value="AI Solutions">AI Solutions</option>
-                        <option value="Other">Other</option>
-                      </select>
-                      <div className="absolute right-5 top-[44px] pointer-events-none">
-                        <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7"></path></svg>
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    
+                    {/* Solid iOS Dark Mode inputs */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <input 
+                          type="text" name="name" required
+                          className="w-full bg-[#2C2C2E] focus:bg-[#3A3A3C] border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#007AFF]/80 transition-all text-white placeholder:text-[#8E8E93] font-medium"
+                          placeholder="Your Name"
+                        />
+                      </div>
+                      <div>
+                        <input 
+                          type="email" name="email" required
+                          className="w-full bg-[#2C2C2E] focus:bg-[#3A3A3C] border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#007AFF]/80 transition-all text-white placeholder:text-[#8E8E93] font-medium"
+                          placeholder="Email Address"
+                        />
                       </div>
                     </div>
-                  </div>
 
-                  <div className="flex flex-col">
-                    <label className="text-xs font-black text-black uppercase tracking-widest mb-2 block">Project Details</label>
-                    <textarea 
-                      name="message" required rows={3}
-                      className="w-full bg-gray-100 border-2 border-transparent focus:border-black rounded-none px-5 py-4 text-lg outline-none transition-all text-black resize-none font-bold placeholder:text-gray-400"
-                      placeholder="Briefly describe your goals, budget, or timeline..."
-                    />
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="group relative w-full bg-black hover:bg-gray-900 rounded-none p-6 mt-4 transition-colors disabled:opacity-50 border-none"
-                  >
-                    <div className="relative flex items-center justify-between px-2">
-                      <span className="text-lg font-black uppercase tracking-[0.2em] text-white">
-                        {isSubmitting ? "Deploying..." : "Submit Project"}
-                      </span>
-                      {!isSubmitting && (
-                        <ArrowRight className="w-6 h-6 text-white group-hover:translate-x-3 transition-transform" strokeWidth={3} />
-                      )}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <input 
+                          type="tel" name="phone" required
+                          className="w-full bg-[#2C2C2E] focus:bg-[#3A3A3C] border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#007AFF]/80 transition-all text-white placeholder:text-[#8E8E93] font-medium"
+                          placeholder="Phone Number"
+                        />
+                      </div>
+                      <div className="relative">
+                        <select 
+                          name="project_type" required
+                          className="w-full bg-[#2C2C2E] focus:bg-[#3A3A3C] border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#007AFF]/80 transition-all text-white appearance-none cursor-pointer font-medium"
+                        >
+                          <option value="" disabled selected hidden className="text-[#8E8E93]">What do you need?</option>
+                          <option value="Web Application">Web Application</option>
+                          <option value="Website Design">Website Design</option>
+                          <option value="AI Solutions">AI Solutions</option>
+                          <option value="Other">Other</option>
+                        </select>
+                        <div className="absolute right-4 top-[14px] pointer-events-none">
+                          <svg className="w-4 h-4 text-[#8E8E93]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                      </div>
                     </div>
-                  </button>
-                </form>
+
+                    <div>
+                      <textarea 
+                        name="message" required rows={3}
+                        className="w-full bg-[#2C2C2E] focus:bg-[#3A3A3C] border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-[#007AFF]/80 transition-all text-white resize-none placeholder:text-[#8E8E93] font-medium"
+                        placeholder="Tell us a little bit about your vision..."
+                      />
+                    </div>
+
+                    {/* iOS Primary Action Button */}
+                    <button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full bg-[#007AFF] hover:bg-[#005ecb] active:scale-[0.98] rounded-[14px] py-4 mt-2 transition-all disabled:opacity-50 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm"
+                    >
+                      {isSubmitting ? "Sending..." : "Send Request"}
+                    </button>
+                  </form>
+                  
+                  <p className="text-center text-[11px] text-[#8E8E93] mt-5 font-medium">
+                    Your information is secure and will never be shared.
+                  </p>
+                </>
               )}
             </div>
           </motion.div>
