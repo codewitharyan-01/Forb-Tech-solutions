@@ -6,7 +6,7 @@
   "contactPhone": "+91 90236 68571",
   "contactEmail": "forbteck@gmail.com",
   "contactWhatsApp": "919023668571",
-  "primaryColor": "#2563eb",
+  "primaryColor": "#ff1212",
   "announcementText": "This website is under maintenance ",
-  "announcementActive": true
+  "announcementActive": false
 }
