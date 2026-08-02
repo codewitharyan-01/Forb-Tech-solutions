@@ -1,0 +1,38 @@
+[
+  {
+    "id": "life-fitness",
+    "name": "Life Fitness",
+    "category": "Web App",
+    "url": "https://hardcore-nikol.vercel.app/"
+  },
+  {
+    "id": "culinary-hub",
+    "name": "Culinary Hub",
+    "category": "Restaurant",
+    "url": "https://dev-munjani.github.io/Dev-s-Kitchen/"
+  },
+  {
+    "id": "bhavnagari",
+    "name": "Bhavnagari",
+    "category": "Food Delivery",
+    "url": "https://buntykakabhavnagari.github.io/Banti-Kaka-Bhavnagari-Bateta-Bhungla/"
+  },
+  {
+    "id": "empire-799",
+    "name": "Empire 799",
+    "category": "E-Commerce",
+    "url": "https://empire799.com/"
+  },
+  {
+    "id": "anaya-dental",
+    "name": "Anaya Dental",
+    "category": "Healthcare",
+    "url": "https://anaya-dental-care.vercel.app/"
+  },
+  {
+    "id": "rajvi-khaman",
+    "name": "Rajvi Khaman",
+    "category": "Branding",
+    "url": "https://codewitharyan-01.github.io/Rajvi_Khaman/"
+  }
+]

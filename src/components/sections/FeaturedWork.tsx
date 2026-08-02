@@ -3,15 +3,10 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import projectsData from "@/data/projects.json";
 
-const projects = [
-  { name: "Life Fitness", category: "Web App", url: "https://hardcore-nikol.vercel.app/", domain: "Gym Management" },
-  { name: "Culinary Hub", category: "Restaurant", url: "https://dev-munjani.github.io/Dev-s-Kitchen/", domain: "dev-s-kitchen.com" },
-  { name: "Bhavnagari", category: "Food Delivery", url: "https://buntykakabhavnagari.github.io/Banti-Kaka-Bhavnagari-Bateta-Bhungla/", domain: "bhavnagarifood.com" },
-  { name: "Empire 799", category: "E-Commerce", url: "https://empire799.com/", domain: "empire799.com" },
-  { name: "Anaya Dental", category: "Healthcare", url: "https://anaya-dental-care.vercel.app/", domain: "anaya-dental-care.vercel.app" },
-  { name: "Rajvi Khaman", category: "Branding", url: "https://codewitharyan-01.github.io/Rajvi_Khaman/", domain: "rajvi-khaman.com" }
-];
+// We keep a local reference to the imported data
+const projects = projectsData;
 
 export function FeaturedWork() {
   const containerRef = useRef<HTMLDivElement>(null);

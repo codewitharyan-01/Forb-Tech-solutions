@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 interface LogoProps {
   className?: string;
@@ -6,8 +9,32 @@ interface LogoProps {
 }
 
 export function Logo({ className = "", iconOnly = false }: LogoProps) {
+  const [clicks, setClicks] = useState(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const router = useRouter();
+
+  const handleLogoClick = () => {
+    const newCount = clicks + 1;
+    setClicks(newCount);
+
+    if (newCount >= 5) {
+      setClicks(0);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      router.push("/hq");
+      return;
+    }
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setClicks(0);
+    }, 2000); // 2-second window to tap 5 times
+  };
+
   return (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
+    <div 
+      className={`flex items-center gap-3 select-none cursor-pointer ${className}`}
+      onClick={handleLogoClick}
+    >
       
       {/* Scalable SVG Icon */}
       <svg 
