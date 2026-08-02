@@ -32,7 +32,7 @@ export function GlobalContactModal() {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    formData.append("access_key", "0c894215-2a87-4b5f-ac92-962b88e0b35c");
     formData.append("subject", "New Project Lead from ForbTech Website!");
 
     try {
