@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://forbtech.com/sitemap.xml',
+    sitemap: 'https://forb-tech-solutions.vercel.app/sitemap.xml',
   }
 }

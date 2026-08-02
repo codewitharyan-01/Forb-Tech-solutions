@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ForbTech | Elite Engineering & Digital Solutions",
     description: "Partner with our elite engineering team to build scalable digital products, websites, and AI solutions.",
-    url: "https://forbtech.com",
+    url: "https://forb-tech-solutions.vercel.app",
     siteName: "ForbTech",
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         alt: "ForbTech Preview Image",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
@@ -45,23 +45,23 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService", 
   "name": "ForbTech",
-  "image": "https://forbtech.com/og-image.png",
-  "@id": "https://forbtech.com",
-  "url": "https://forbtech.com",
-  "telephone": "+1-000-000-0000",
+  "image": "https://forb-tech-solutions.vercel.app/og-image.png",
+  "@id": "https://forb-tech-solutions.vercel.app",
+  "url": "https://forb-tech-solutions.vercel.app",
+  "telephone": "",
   "priceRange": "$$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "123 Tech Boulevard",
-    "addressLocality": "San Francisco",
-    "addressRegion": "CA",
-    "postalCode": "94105",
-    "addressCountry": "US"
+    "streetAddress": "",
+    "addressLocality": "Gandhinagar, Ahmedabad",
+    "addressRegion": "Gujarat",
+    "postalCode": "",
+    "addressCountry": "IN"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 37.7749,
-    "longitude": -122.4194
+    "latitude": 23.2156,
+    "longitude": 72.6369
   },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
