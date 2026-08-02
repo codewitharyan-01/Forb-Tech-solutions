@@ -119,11 +119,11 @@ export function GlobalContactModal() {
                 <>
                   {/* Centered Copy */}
                   <div className="text-center mb-8 px-4 mt-2">
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-3">
-                      Start a Project
+                    <h2 className="text-3xl font-black tracking-tight text-foreground mb-3 uppercase">
+                      Don't Just Build. Dominate.
                     </h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed font-medium">
-                      We'd love to help bring your ideas to life. Share a few details below, and let's build something beautiful together.
+                    <p className="text-sm text-muted-foreground leading-relaxed font-bold">
+                      You provide the vision. We provide the world-class engineering to make it unstoppable. Drop your details below, and our lead architect will contact you today.
                     </p>
                   </div>
 
