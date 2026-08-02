@@ -5,8 +5,6 @@ import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const projects = [
-  { name: "Wispa AI", category: "Startup Prototype", url: "https://portfolio-by-aryan.netlify.app/", domain: "SSIP Phase 1" },
-  { name: "Smart City", category: "Civic Portal", url: "https://portfolio-by-aryan.netlify.app/", domain: "Award Winning" },
   { name: "Life Fitness", category: "Web App", url: "https://hardcore-nikol.vercel.app/", domain: "Gym Management" },
   { name: "Culinary Hub", category: "Restaurant", url: "https://dev-munjani.github.io/Dev-s-Kitchen/", domain: "dev-s-kitchen.com" },
   { name: "Bhavnagari", category: "Food Delivery", url: "https://buntykakabhavnagari.github.io/Banti-Kaka-Bhavnagari-Bateta-Bhungla/", domain: "bhavnagarifood.com" },
@@ -29,7 +27,7 @@ export function FeaturedWork() {
       id="work" 
       ref={containerRef}
       className="relative bg-background z-10"
-      style={{ height: "150vh" }} // Provides the scroll space needed to peel through all cards
+      style={{ height: `${(projects.length + 1) * 75}vh` }} // Massively increased scroll space so cards peel away slowly
     >
       <div className="sticky top-[7.5vh] h-[85vh] w-full flex flex-col justify-center overflow-hidden py-8 md:py-12">
         
