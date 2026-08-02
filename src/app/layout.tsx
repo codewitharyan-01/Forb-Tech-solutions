@@ -12,6 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://forb-tech-solutions.vercel.app"),
   title: siteConfig.seoTitle,
   description: siteConfig.seoDescription,
   keywords: ["Software Development Agency", "Custom Web Apps", "AI Solutions", "Tech Agency", "Web Design"],
