@@ -13,8 +13,68 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ForbTech",
-  description: "We help startups, businesses, and enterprises build custom software, websites, AI solutions, and scalable digital products that accelerate growth.",
+  title: "ForbTech | Elite Engineering & Digital Solutions",
+  description: "Partner with ForbTech's elite engineering team to build custom software, websites, AI solutions, and scalable digital products that accelerate business growth.",
+  keywords: ["Software Development Agency", "Custom Web Apps", "AI Solutions", "Tech Agency", "Web Design"],
+  openGraph: {
+    title: "ForbTech | Elite Engineering & Digital Solutions",
+    description: "Partner with our elite engineering team to build scalable digital products, websites, and AI solutions.",
+    url: "https://forbtech.com",
+    siteName: "ForbTech",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ForbTech Preview Image",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ForbTech | Elite Engineering & Digital Solutions",
+    description: "Partner with our elite engineering team to build scalable digital products, websites, and AI solutions.",
+    images: ["/og-image.png"],
+  },
+};
+
+// JSON-LD Structured Data to strictly link the website to a Google Business Profile
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService", 
+  "name": "ForbTech",
+  "image": "https://forbtech.com/og-image.png",
+  "@id": "https://forbtech.com",
+  "url": "https://forbtech.com",
+  "telephone": "+1-000-000-0000",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Tech Boulevard",
+    "addressLocality": "San Francisco",
+    "addressRegion": "CA",
+    "postalCode": "94105",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 37.7749,
+    "longitude": -122.4194
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "18:00"
+  }
 };
 
 export default function RootLayout({
@@ -24,6 +84,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <SmoothScrollProvider>
           <div className="relative flex min-h-screen flex-col overflow-clip bg-muted/20">
