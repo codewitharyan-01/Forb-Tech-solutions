@@ -6,7 +6,7 @@
   "contactPhone": "+91 90236 68571",
   "contactEmail": "forbteck@gmail.com",
   "contactWhatsApp": "919023668571",
-  "primaryColor": "#0000ff",
-  "announcementText": "",
-  "announcementActive": false
+  "primaryColor": "#ff0000",
+  "announcementText": "Hey, vivek welcome to the firm ",
+  "announcementActive": true
 }
