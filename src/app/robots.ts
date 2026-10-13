@@ -1,11 +1,13 @@
-import { MetadataRoute } from 'next'
- 
+import { MetadataRoute } from "next";
+import { siteConfig } from "@/content/siteConfig";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/", "/hq/", "/thank-you"],
     },
-    sitemap: 'https://forb-tech-solutions.vercel.app/sitemap.xml',
-  }
+    sitemap: `${siteConfig.siteUrl}/sitemap.xml`,
+  };
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
-import { useState, useRef } from "react"
 import { CheckCircle2 } from "lucide-react"
 
 const steps = [
@@ -50,126 +48,61 @@ const steps = [
 ]
 
 export function Process() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  // Track scroll progress of the massive container
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Map the scroll progress (0 to 1) to the active step index (0 to 6)
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    let index = Math.round(latest * (steps.length - 1));
-    
-    // Clamp values to prevent out of bounds
-    if (index < 0) index = 0;
-    if (index >= steps.length) index = steps.length - 1;
-    
-    if (index !== activeIndex) {
-      setActiveIndex(index);
-    }
-  });
-
   return (
-    // The massive scroll track (400vh gives plenty of scrolling room)
-    <section id="process" ref={containerRef} className="relative bg-background z-10" style={{ height: "400vh" }}>
-      
-      {/* The Sticky Viewport that locks to the screen while you scroll down */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+    <section id="process" className="py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative z-10">
+      <div className="max-w-4xl mx-auto w-full">
         
-        <div className="max-w-4xl mx-auto px-4 w-full relative z-10">
-          
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-4 text-foreground">Delivery <span className="text-primary">Methodology.</span></h2>
-          </div>
+        <div className="mb-20 text-center">
+          <span className="text-xs font-medium uppercase tracking-wider text-[var(--muted-text)] block mb-2">
+            Engineered Workflow
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-[-0.03em] text-[var(--foreground)] mb-3">
+            How we bring your project to life.
+          </h2>
+          <p className="text-lg text-[var(--muted-text)] font-normal max-w-xl mx-auto">
+            A transparent, milestone-driven process with continuous client communication.
+          </p>
+        </div>
 
-          <div className="flex flex-col gap-8 md:gap-12">
-            
-            {/* Horizontal Progress Bar */}
-            <div className="relative w-full max-w-3xl mx-auto flex items-center justify-between">
-              {/* Background Line */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-border/50 rounded-full z-0" />
+        <div className="flex flex-col gap-12">
+          {steps.map((step, i) => (
+            <div key={step.id} className="flex flex-col md:flex-row gap-6 md:gap-10 relative">
+              {/* Timeline Connector Line */}
+              {i !== steps.length - 1 && (
+                <div className="hidden md:block absolute top-12 bottom-[-48px] left-[19px] w-px bg-[var(--line)] z-0" />
+              )}
               
-              {/* Active Progress Line */}
-              <div 
-                className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-primary rounded-full z-0 transition-all duration-300 ease-out"
-                style={{ width: `${(activeIndex / (steps.length - 1)) * 100}%` }}
-              />
+              <div className="flex items-start md:shrink-0 relative z-10">
+                <div className="w-10 h-10 rounded-full bg-[var(--surface-sunken)] border border-[var(--line)] text-[var(--foreground)] text-xs font-semibold flex items-center justify-center">
+                  {step.id}
+                </div>
+              </div>
 
-              {/* Nodes */}
-              {steps.map((step, i) => {
-                const isActive = activeIndex === i;
-                const isPast = i <= activeIndex;
-                
-                return (
-                  <div
-                    key={step.id}
-                    className={`relative z-10 w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-sm transition-all duration-300 ${
-                      isActive 
-                      ? "bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary-rgb),0.5)] scale-125" 
-                      : isPast 
-                        ? "bg-primary text-primary-foreground" 
-                        : "bg-background border-2 border-border/50 text-muted-foreground"
-                    }`}
-                  >
-                    {i + 1}
-                  </div>
-                )
-              })}
+              <div className="flex-1 pb-4">
+                <h3 className="text-2xl font-semibold mb-2 text-[var(--foreground)] tracking-[-0.02em]">
+                  {step.title}
+                </h3>
+                <p className="text-base text-[var(--muted-text)] font-normal leading-relaxed mb-6">
+                  {step.desc}
+                </p>
+
+                <div className="bg-[var(--surface-sunken)] p-6 rounded-2xl border border-[var(--line)]">
+                  <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--muted-text)] mb-3">Key Deliverables</h4>
+                  <ul className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    {step.deliverables.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-xs font-medium text-[var(--foreground)]">
+                        <CheckCircle2 strokeWidth={2} className="w-3.5 h-3.5 text-[#0071e3] dark:text-[#2997ff] shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-
-            {/* Single Display Card */}
-            <div className="glass rounded-[2rem] border border-border/50 p-8 md:p-12 relative overflow-hidden min-h-[350px] shadow-2xl flex items-center">
-              
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative z-10 w-full"
-                >
-                  
-                  {/* Header */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-primary font-black text-sm md:text-base tracking-widest bg-primary/10 px-4 py-1 rounded-full uppercase">Step {steps[activeIndex].id}</span>
-                  </div>
-                  
-                  <h3 className="text-3xl md:text-4xl font-black tracking-tight mb-4 text-foreground">
-                    {steps[activeIndex].title}
-                  </h3>
-                  
-                  <p className="text-base md:text-lg font-medium text-muted-foreground leading-relaxed mb-8 max-w-2xl">
-                    {steps[activeIndex].desc}
-                  </p>
-
-                  {/* Deliverables */}
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-foreground mb-4 opacity-70">Key Deliverables</h4>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                      {steps[activeIndex].deliverables.map((item, idx) => (
-                        <li key={idx} className="flex items-center gap-3 text-sm font-bold text-foreground">
-                          <CheckCircle2 strokeWidth={1.2} className="w-5 h-5 text-primary shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </motion.div>
-              </AnimatePresence>
-              
-            </div>
-
-          </div>
-
+          ))}
         </div>
 
       </div>
     </section>
-  )
+  );
 }

@@ -13,9 +13,10 @@ import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 
 // Generate metadata for the SEO page
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const page = seoData.find(
-    (p: any) => p.active && `${p.service}-in-${p.location}`.toLowerCase().replaceAll(' ', '-') === params.slug
+    (p: any) => p.active && `${p.service}-in-${p.location}`.toLowerCase().replaceAll(' ', '-') === slug
   );
 
   if (!page) {
@@ -28,9 +29,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function SeoLandingPage({ params }: { params: { slug: string } }) {
+export default async function SeoLandingPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const page = seoData.find(
-    (p: any) => p.active && `${p.service}-in-${p.location}`.toLowerCase().replaceAll(' ', '-') === params.slug
+    (p: any) => p.active && `${p.service}-in-${p.location}`.toLowerCase().replaceAll(' ', '-') === slug
   );
 
   if (!page) {

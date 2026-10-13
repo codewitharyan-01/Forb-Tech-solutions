@@ -1,0 +1,27 @@
+# ForbTech
+
+> Affordable website development, app development, Google Business Profile setup and IT services for businesses in Gujarat, India.
+
+## Services
+- [Website Development](https://forb-tech-solutions.vercel.app/services/website-development): Fast, mobile-friendly websites for local businesses.
+- [Google Business Profile](https://forb-tech-solutions.vercel.app/services/google-business-profile): Setup and optimisation for Google Maps and local search.
+- [App Development](https://forb-tech-solutions.vercel.app/services/app-development): Android, iOS and web apps.
+- [IT Support](https://forb-tech-solutions.vercel.app/services/it-support): Hosting, domains, business email and maintenance.
+- [E-Commerce & Digital Catalogs](https://forb-tech-solutions.vercel.app/services/ecommerce): WhatsApp ordering and digital stores with 0% commissions.
+- [UI / UX Design](https://forb-tech-solutions.vercel.app/services/ui-ux-design): Clean, conversion-focused mobile and web interface design.
+
+## Key pages
+- [Pricing](https://forb-tech-solutions.vercel.app/pricing)
+- [Our work](https://forb-tech-solutions.vercel.app/work)
+- [About](https://forb-tech-solutions.vercel.app/about)
+- [Process](https://forb-tech-solutions.vercel.app/process)
+- [Contact](https://forb-tech-solutions.vercel.app/contact)
+- [FAQs](https://forb-tech-solutions.vercel.app/faq)
+- [Blog](https://forb-tech-solutions.vercel.app/blog)
+
+## Facts
+- Based in: Ahmedabad & Gandhinagar, Gujarat, India
+- Serves: Gujarat (Ahmedabad, Gandhinagar, Surat, Vadodara, Rajkot) and India-wide
+- Contact: forbteck@gmail.com, WhatsApp +91 90236 68571
+- Founder: Aryan
+- Philosophy: 100% Client Ownership (Code, Domain & Hosting), Fixed Quotes, Sub-2s 4G Mobile Loading Speed

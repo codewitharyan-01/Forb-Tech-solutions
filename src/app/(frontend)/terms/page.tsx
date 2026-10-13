@@ -1,97 +1,85 @@
-"use client";
+import React from "react";
+import type { Metadata } from "next";
+import { siteConfig } from "@/content/siteConfig";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { Badge } from "@/components/ui/Badge";
+import { ShieldCheck } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { FileText } from "lucide-react";
-
-const sections = [
-  {
-    id: "acceptance",
-    title: "1. Acceptance of Terms",
-    content: "By accessing and using our services, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, you must not use our services. We reserve the right to update or modify these terms at any time without prior notice."
-  },
-  {
-    id: "services",
-    title: "2. Description of Services",
-    content: "ForbTech provides web development, design, and software engineering services. We reserve the right to modify, suspend, or discontinue any part of the service at any time. We shall not be liable to you or any third party for any modification, suspension, or discontinuance of the service."
-  },
-  {
-    id: "obligations",
-    title: "3. User Obligations",
-    content: "You agree to use our services only for lawful purposes. You must not use our services in any way that causes, or may cause, damage to the services or impairment of the availability or accessibility of the services. You are responsible for ensuring that all persons who access our services through your internet connection are aware of these Terms."
-  },
-  {
-    id: "intellectual-property",
-    title: "4. Intellectual Property",
-    content: "All content included on our website, such as text, graphics, logos, images, as well as the compilation thereof, and any software used on the site, is the property of ForbTech or its suppliers and protected by copyright and other laws."
-  }
-];
+export const metadata: Metadata = {
+  title: "Terms of Service | Transparent Client Agreement",
+  description:
+    "ForbTech terms of service. Transparent milestone payments, 100% code and domain ownership guarantee, and project delivery terms.",
+};
 
 export default function TermsPage() {
   return (
-    <div className="flex flex-col min-h-screen pb-4 gap-4 px-2 md:px-4 pt-24">
-      <div className="rounded-[3rem] bg-background/90 backdrop-blur-md shadow-xl overflow-clip border border-border/50 relative z-10 group" style={{ transform: "translateZ(0)" }}>
-        
-        {/* Subtle Background */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-        
-        <div className="relative z-10 px-4 md:px-12 py-20 max-w-[1400px] mx-auto w-full flex flex-col md:flex-row gap-12 md:gap-24">
-          
-          {/* Sidebar Navigation */}
-          <div className="w-full md:w-1/3 lg:w-1/4">
-            <div className="sticky top-32">
-              <div className="w-12 h-12 rounded-2xl bg-[#06b6d4]/10 border border-[#06b6d4]/20 flex items-center justify-center mb-8">
-                <FileText className="w-6 h-6 text-[#06b6d4]" />
-              </div>
-              <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8">
-                Terms of <br/> Service
-              </h1>
-              <p className="text-xs font-bold uppercase tracking-widest opacity-40 mb-8 font-mono">
-                Last Updated: Aug 2026
-              </p>
-              
-              <nav className="flex flex-col gap-4 hidden md:flex">
-                {sections.map((section) => (
-                  <a 
-                    key={section.id} 
-                    href={`#${section.id}`}
-                    className="text-sm font-bold opacity-60 hover:opacity-100 hover:text-[#06b6d4] transition-colors uppercase tracking-widest"
-                  >
-                    {section.title}
-                  </a>
-                ))}
-              </nav>
-            </div>
-          </div>
+    <div className="py-10 md:py-16">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Breadcrumb items={[{ label: "Terms of Service" }]} className="mb-8" />
 
-          {/* Reading Column */}
-          <div className="w-full md:w-2/3 lg:w-3/4 max-w-3xl">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="prose prose-invert prose-lg max-w-none"
-            >
-              <div className="bg-foreground/5 border border-foreground/10 p-6 md:p-8 rounded-2xl mb-12 font-mono text-sm opacity-80">
-                Please read these Terms and Conditions carefully before using our services. Your access to and use of the service is conditioned on your acceptance of and compliance with these terms.
-              </div>
+        <div className="mb-12 pb-8 border-b border-[var(--line)]">
+          <Badge variant="neutral" size="sm" className="mb-4" icon={<ShieldCheck className="w-3.5 h-3.5" />}>
+            Transparent Engagement
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl font-semibold text-[var(--foreground)] tracking-[-0.03em] leading-tight">
+            Terms of Service
+          </h1>
+          <p className="mt-3 text-xs sm:text-sm text-[var(--muted-text)]">
+            Last Updated: October 2024 • Governing Jurisdiction: Gujarat, India.
+          </p>
+        </div>
 
-              {sections.map((section, index) => (
-                <section key={section.id} id={section.id} className="mb-16 scroll-mt-32">
-                  <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-6 text-[#06b6d4]">
-                    {section.title}
-                  </h2>
-                  <p className="text-base md:text-lg opacity-70 leading-relaxed font-medium">
-                    {section.content}
-                  </p>
-                  
-                  {index !== sections.length - 1 && (
-                    <div className="w-full h-px bg-foreground/10 mt-16" />
-                  )}
-                </section>
-              ))}
-            </motion.div>
-          </div>
+        <div className="prose-readable space-y-8 text-sm sm:text-base text-[var(--foreground)] leading-relaxed">
+          <section>
+            <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">1. Agreement &amp; Scope</h2>
+            <p className="text-[var(--muted-text)]">
+              These Terms of Service govern all website development, Google Business Profile optimization, and IT consulting services provided by <strong>ForbTech</strong> to our clients. Prior to initiating any build, we supply a written scope blueprint outlining deliverables, milestones, and fixed pricing.
+            </p>
+          </section>
 
+          <section>
+            <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">2. Milestone Payment Terms</h2>
+            <p className="text-[var(--muted-text)] mb-3">
+              Unless explicitly agreed otherwise in a custom enterprise contract:
+            </p>
+            <ul className="list-disc pl-5 space-y-2 text-[var(--muted-text)]">
+              <li><strong>50% Advance Deposit:</strong> Due upon written approval of the project scope blueprint before development commences.</li>
+              <li><strong>50% Final Balance:</strong> Due only after the website has been staged, tested on mobile devices, and approved by the client for live domain launch.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">3. 100% Client Ownership Guarantee</h2>
+            <p className="text-[var(--muted-text)] mb-3">
+              We operate on an absolute ownership model:
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-[var(--muted-text)]">
+              <li><strong>Domain Names:</strong> Registered directly under your name and contact details.</li>
+              <li><strong>Source Code:</strong> Full source code is transferred to your GitHub or designated repository upon final milestone settlement.</li>
+              <li><strong>Hosting &amp; Accounts:</strong> Created in your cloud accounts with full admin rights. We hold zero proprietary software hostage.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">4. Client Responsibilities</h2>
+            <p className="text-[var(--muted-text)]">
+              To ensure on-time delivery within our 7 to 10 day window, the client agrees to provide necessary text details, photos of products/locations, and timely feedback on preview staging links within 48 hours.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">5. Post-Launch Warranty &amp; Support</h2>
+            <p className="text-[var(--muted-text)]">
+              All website builds include 30 to 60 days of complimentary bug-fixing and minor text adjustments. Requests for new major features or additional pages beyond the agreed scope blueprint will be quoted as separate milestone enhancements.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">6. Governing Law &amp; Jurisdiction</h2>
+            <p className="text-[var(--muted-text)]">
+              These terms are governed by and construed in accordance with the laws of the Republic of India. Any disputes arising under or in connection with our services shall be subject to the exclusive jurisdiction of the competent courts in Ahmedabad / Gandhinagar, Gujarat.
+            </p>
+          </section>
         </div>
       </div>
     </div>

@@ -75,103 +75,102 @@ export function GlobalContactModal() {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6 pointer-events-auto">
-          {/* Pure White Solid Overlay (Hides Website Entirely) */}
+          {/* Apple Frosted Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
             onClick={handleClose}
-            className="absolute inset-0 bg-white"
+            className="absolute inset-0 bg-black/40 backdrop-blur-md"
           />
 
-          {/* Solid Matte Modal Sheet (Using Website Theme Colors) */}
+          {/* Apple Sheet Dialog */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            exit={{ opacity: 0, scale: 0.96, y: 15 }}
             transition={{ type: "spring", stiffness: 350, damping: 30 }}
-            className="relative w-full max-w-xl bg-background border border-border/50 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden"
+            className="relative w-full max-w-lg bg-[var(--surface)] border border-[var(--line)] rounded-3xl shadow-2xl flex flex-col overflow-hidden"
           >
             <div className="p-8 md:p-10 flex flex-col relative z-10">
               
-              {/* Close Button (top right) */}
+              {/* Close Button */}
               <button 
                 onClick={handleClose}
-                className="absolute top-5 right-5 w-8 h-8 bg-foreground/5 hover:bg-foreground/10 rounded-full flex items-center justify-center text-foreground/50 hover:text-foreground transition-colors"
+                aria-label="Close modal"
+                className="absolute top-5 right-5 w-8 h-8 rounded-full bg-[var(--surface-sunken)] hover:bg-[var(--line)] flex items-center justify-center text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors"
               >
-                <X className="w-4 h-4" strokeWidth={2.5} />
+                <X className="w-4 h-4" />
               </button>
 
               {isSubmitted ? (
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center text-center py-12"
+                  className="flex flex-col items-center justify-center text-center py-10"
                 >
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
-                    <Sparkles className="w-8 h-8 text-primary-foreground" />
+                  <div className="w-14 h-14 bg-[var(--surface-sunken)] border border-[var(--line)] rounded-full flex items-center justify-center mb-5 text-[#0071e3] dark:text-[#2997ff]">
+                    <Sparkles className="w-6 h-6" />
                   </div>
-                  <h4 className="text-2xl font-bold tracking-tight mb-2 text-foreground">Message Sent</h4>
-                  <p className="text-muted-foreground text-sm max-w-[250px] font-medium">Thank you for reaching out. Our team will review your project and get back to you within 24 hours.</p>
+                  <h4 className="text-2xl font-semibold tracking-[-0.02em] mb-2 text-[var(--foreground)]">Message Received</h4>
+                  <p className="text-[var(--muted-text)] text-sm max-w-[280px] font-normal leading-relaxed">
+                    Thank you for reaching out. Founder Aryan will evaluate your project and reply within 24 hours.
+                  </p>
                 </motion.div>
               ) : (
                 <>
-                  {/* Centered Copy */}
-                  <div className="text-center mb-8 px-4 mt-2">
-                    <h2 className="text-2xl md:text-3xl font-black tracking-tight text-foreground mb-4 uppercase">
-                      Don't Just Build. Dominate.
+                  <div className="text-center mb-8 px-2">
+                    <span className="text-xs font-medium uppercase tracking-wider text-[var(--muted-text)] block mb-1">
+                      Direct Consultation
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.02em] text-[var(--foreground)] mb-2">
+                      Ready to build your digital presence?
                     </h2>
-                    
-                    {/* Stylish dividing line */}
-                    <div className="w-16 h-1 bg-primary mx-auto mb-5 rounded-full" />
-
-                    <p className="text-sm text-muted-foreground leading-relaxed font-bold text-justify">
-                      Great ideas demand exceptional engineering. Tell us exactly what you are trying to build, and our technical team will show you how we can bring it to life.
+                    <p className="text-sm text-[var(--muted-text)] leading-relaxed">
+                      Share your goals. We provide a complimentary technical blueprint and fixed price proposal within 24 hours.
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    
-                    {/* Inputs */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <input 
                           type="text" name="name" required
-                          className="w-full bg-foreground/5 focus:bg-foreground/10 border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-primary/80 transition-all text-foreground placeholder:text-muted-foreground font-medium"
+                          className="w-full bg-[var(--surface-sunken)] border border-[var(--line)] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0071e3] dark:focus:border-[#2997ff] transition-all text-[var(--foreground)] placeholder:text-[var(--muted-text)]"
                           placeholder="Your Name"
                         />
                       </div>
                       <div>
                         <input 
                           type="email" name="email" required
-                          className="w-full bg-foreground/5 focus:bg-foreground/10 border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-primary/80 transition-all text-foreground placeholder:text-muted-foreground font-medium"
+                          className="w-full bg-[var(--surface-sunken)] border border-[var(--line)] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0071e3] dark:focus:border-[#2997ff] transition-all text-[var(--foreground)] placeholder:text-[var(--muted-text)]"
                           placeholder="Email Address"
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <input 
                           type="tel" name="phone" required
-                          className="w-full bg-foreground/5 focus:bg-foreground/10 border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-primary/80 transition-all text-foreground placeholder:text-muted-foreground font-medium"
-                          placeholder="Phone Number"
+                          className="w-full bg-[var(--surface-sunken)] border border-[var(--line)] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0071e3] dark:focus:border-[#2997ff] transition-all text-[var(--foreground)] placeholder:text-[var(--muted-text)]"
+                          placeholder="Phone / WhatsApp"
                         />
                       </div>
                       <div className="relative">
                         <select 
-                          name="project_type" required
-                          className="w-full bg-foreground/5 focus:bg-foreground/10 border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-primary/80 transition-all text-foreground appearance-none cursor-pointer font-medium"
+                          name="project_type" required defaultValue=""
+                          className="w-full bg-[var(--surface-sunken)] border border-[var(--line)] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0071e3] dark:focus:border-[#2997ff] transition-all text-[var(--foreground)] appearance-none cursor-pointer"
                         >
-                          <option value="" disabled selected hidden className="text-muted-foreground">What do you need?</option>
-                          <option value="Web Application" className="bg-background text-foreground">Web Application</option>
-                          <option value="Website Design" className="bg-background text-foreground">Website Design</option>
-                          <option value="AI Solutions" className="bg-background text-foreground">AI Solutions</option>
-                          <option value="Other" className="bg-background text-foreground">Other</option>
+                          <option value="" disabled hidden>What do you need?</option>
+                          <option value="Website Development">Website Development</option>
+                          <option value="Google Business SEO">Google Business SEO</option>
+                          <option value="Custom Web / Mobile App">Custom Web / Mobile App</option>
+                          <option value="WhatsApp Store / E-commerce">WhatsApp Store / E-commerce</option>
                         </select>
                         <div className="absolute right-4 top-[14px] pointer-events-none">
-                          <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                          <svg className="w-4 h-4 text-[var(--muted-text)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                       </div>
                     </div>
@@ -179,23 +178,22 @@ export function GlobalContactModal() {
                     <div>
                       <textarea 
                         name="message" required rows={3}
-                        className="w-full bg-foreground/5 focus:bg-foreground/10 border-none rounded-[14px] px-4 py-3.5 text-sm outline-none focus:ring-2 focus:ring-primary/80 transition-all text-foreground resize-none placeholder:text-muted-foreground font-medium"
-                        placeholder="Tell us a little bit about your vision..."
+                        className="w-full bg-[var(--surface-sunken)] border border-[var(--line)] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#0071e3] dark:focus:border-[#2997ff] transition-all text-[var(--foreground)] resize-none placeholder:text-[var(--muted-text)]"
+                        placeholder="Tell us a little about your business and goals..."
                       />
                     </div>
 
-                    {/* Primary Action Button */}
                     <button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-primary hover:opacity-90 active:scale-[0.98] rounded-[14px] py-4 mt-2 transition-all disabled:opacity-50 text-primary-foreground font-bold text-sm flex items-center justify-center gap-2 shadow-sm"
+                      className="w-full rounded-full bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 active:scale-[0.99] py-3.5 mt-2 transition-all disabled:opacity-50 font-medium text-sm flex items-center justify-center gap-2"
                     >
-                      {isSubmitting ? "Sending..." : "Send Request"}
+                      {isSubmitting ? "Sending..." : "Request Free Consultation"}
                     </button>
                   </form>
                   
-                  <p className="text-center text-[11px] text-muted-foreground mt-5 font-medium">
-                    Your information is secure and will never be shared.
+                  <p className="text-center text-[11px] text-[var(--muted-text)] mt-4">
+                    Your details remain strictly confidential and will never be shared.
                   </p>
                 </>
               )}

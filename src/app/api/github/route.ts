@@ -61,7 +61,7 @@ export async function POST(req: Request) {
         "X-GitHub-Api-Version": "2022-11-28"
       },
       body: JSON.stringify({
-        message: "Admin Dashboard: Update projects.json",
+        message: `Admin Dashboard: Update ${filePath.split("/").pop()}`,
         content: contentEncoded,
         sha: sha
       })

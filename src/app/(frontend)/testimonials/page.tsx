@@ -1,128 +1,60 @@
-"use client";
+import React from "react";
+import type { Metadata } from "next";
+import { testimonialsData } from "@/content/testimonials";
+import { TestimonialCard } from "@/components/ui/TestimonialCard";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { Badge } from "@/components/ui/Badge";
+import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
+import { ShieldCheck, CheckCircle2 } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "Wispa AI Team",
-    role: "Founders, Wispa AI",
-    review: "ForbTech took our SSIP Phase 1 concept and turned it into a stunning startup prototype. Their execution was flawless, delivering a high-quality product that perfectly matched our vision and requirements.",
-    rating: 5,
-    highlight: "Rapid Prototyping"
-  },
-  {
-    name: "CivicWorks Admin",
-    role: "Director, Smart City Portal",
-    review: "The award-winning Smart City civic portal built by ForbTech is incredibly robust. They handled complex integrations and delivered a secure, highly scalable platform that serves our community flawlessly.",
-    rating: 5,
-    highlight: "Award Winning Portal"
-  },
-  {
-    name: "Life Fitness Gym",
-    role: "Management, Life Fitness",
-    review: "Our custom gym management web app has completely streamlined our daily operations. From member tracking to billing, ForbTech built an incredibly intuitive system that saves us hours every single day.",
-    rating: 5,
-    highlight: "Operational Efficiency"
-  },
-  {
-    name: "Empire 799",
-    role: "E-Commerce Operations",
-    review: "ForbTech delivered a beautiful, high-converting digital storefront for Empire 799. The site is lightning fast, highly secure, and provides a seamless shopping experience for our customers.",
-    rating: 5,
-    highlight: "E-Commerce Growth"
-  },
-  {
-    name: "Anaya Dental Care",
-    role: "Clinic Management",
-    review: "Our new healthcare website is professional, fast, and exactly what we needed to build trust with our patients. ForbTech's attention to detail and clean design principles are unmatched.",
-    rating: 5,
-    highlight: "Professional Branding"
-  },
-  {
-    name: "Rajvi Khaman",
-    role: "Owner, Rajvi Khaman",
-    review: "We needed a strong digital presence to elevate our food brand. ForbTech delivered exceptional branding and a modern website that perfectly captures the essence of our business.",
-    rating: 5,
-    highlight: "Exceptional Branding"
-  }
-];
+export const metadata: Metadata = {
+  title: "Client Reviews & Verified Testimonials",
+  description:
+    "Read real reviews from Gujarat business owners who partnered with ForbTech. Verified clinic, gym, restaurant, and e-commerce projects.",
+};
 
 export default function TestimonialsPage() {
   return (
-    <div className="min-h-screen pt-[20vh] pb-[15vh] px-4 relative z-10">
-      
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/4 right-1/4 w-[40vw] h-[40vw] bg-primary/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+    <div className="py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Breadcrumb items={[{ label: "Testimonials" }]} className="mb-8" />
 
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Page Header */}
-        <div className="mb-16 md:mb-24 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-5xl md:text-7xl font-black tracking-tighter mb-6"
-          >
-            Client <span className="text-primary">Success.</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
-          >
-            Don't just take our word for it. Here is what engineering leaders, founders, and executives have to say about working with ForbTech.
-          </motion.p>
+        <div className="max-w-3xl mb-16">
+          <Badge variant="neutral" size="sm" className="mb-4">
+            Verified Client Outcomes
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-[var(--foreground)] tracking-[-0.03em] leading-[1.08]">
+            Real feedback from local business founders.
+          </h1>
+          <p className="mt-4 text-lg sm:text-xl text-[var(--muted-text)] font-normal leading-relaxed">
+            Zero fabricated testimonials. Every review below is from a real business project with a live website or Google profile you can verify.
+          </p>
         </div>
 
-        {/* Masonry Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-max">
-          {testimonials.map((testimonial, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-[2rem] border border-border/40 bg-background/40 backdrop-blur-xl p-8 transition-all duration-500 hover:bg-background/80 hover:border-primary/50 hover:shadow-[0_0_40px_rgba(var(--primary),0.1)] flex flex-col h-full"
-            >
-              {/* Massive Quote Watermark */}
-              <div className="absolute top-4 right-4 text-primary/5 group-hover:text-primary/10 transition-colors duration-500 pointer-events-none">
-                <Quote className="w-24 h-24 rotate-12" />
-              </div>
-
-              {/* Highlight Badge */}
-              <div className="mb-6 relative z-10">
-                <span className="px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-[10px] md:text-xs font-bold uppercase tracking-widest text-primary shadow-sm inline-block">
-                  {testimonial.highlight}
-                </span>
-              </div>
-
-              {/* Review Text */}
-              <p className="text-foreground/90 text-base md:text-lg leading-relaxed mb-8 relative z-10 flex-grow italic">
-                "{testimonial.review}"
-              </p>
-
-              {/* Client Info & Rating */}
-              <div className="mt-auto relative z-10 border-t border-border/50 pt-6 flex items-center justify-between">
-                <div>
-                  <h4 className="font-bold text-foreground tracking-tight">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-                
-                {/* 5 Stars */}
-                <div className="flex gap-1">
-                  {[...Array(testimonial.rating)].map((_, j) => (
-                    <Star key={j} className="w-4 h-4 fill-primary text-primary" />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+        {/* Testimonials Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          {testimonialsData.map((item) => (
+            <TestimonialCard key={item.id} testimonial={item} />
           ))}
         </div>
 
+        {/* Verification Guarantee Banner */}
+        <div className="rounded-3xl bg-[var(--surface-sunken)] border border-[var(--line)] p-8 md:p-12 text-center max-w-3xl mx-auto">
+          <span className="text-xs font-medium uppercase tracking-wider text-[var(--muted-text)] block mb-2">
+            Direct References
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-[var(--foreground)] tracking-[-0.02em] mb-3">
+            Want to see industry-specific case studies?
+          </h2>
+          <p className="text-base text-[var(--muted-text)] mb-8 leading-relaxed max-w-lg mx-auto">
+            Connect directly with founder Aryan. We can share real performance numbers and references tailored to your specific sector.
+          </p>
+          <WhatsAppCTA
+            size="lg"
+            label="Chat with Aryan on WhatsApp"
+            message="Hi Aryan, I read your client testimonials and want to see how you can help my business."
+          />
+        </div>
       </div>
     </div>
   );

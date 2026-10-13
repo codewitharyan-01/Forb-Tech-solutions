@@ -1,106 +1,173 @@
-"use client";
+import React from "react";
+import type { Metadata } from "next";
+import { siteConfig } from "@/content/siteConfig";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Check, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
-import { motion } from "framer-motion";
-import { Code, Cpu, Globe, Rocket } from "lucide-react";
+export const metadata: Metadata = {
+  title: "About Founder Aryan & ForbTech | Local Digital Partner in Gujarat",
+  description:
+    "Learn about Aryan, founder of ForbTech. Why we build fast, budget-friendly websites for small businesses across Gujarat with 100% code ownership.",
+};
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen pb-4 gap-4 px-2 md:px-4 pt-24">
-      <div className="rounded-[3rem] bg-background/90 backdrop-blur-md shadow-xl overflow-clip border border-border/50 relative z-10 group" style={{ transform: "translateZ(0)" }}>
-        
-        {/* Subtle Background */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-50 pointer-events-none" />
-        
-        <div className="relative z-10 px-4 md:px-12 py-16 md:py-32 max-w-[1400px] mx-auto w-full">
-          {/* Header */}
-          <div className="mb-16 md:mb-32 text-center md:text-left">
-            <motion.h1 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[1] md:leading-[0.9]"
-            >
-              I Build <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#06b6d4]">
-                Digital Empires.
-              </span>
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="mt-6 md:mt-8 text-base sm:text-lg md:text-2xl font-bold opacity-70 max-w-3xl leading-relaxed mx-auto md:mx-0"
-            >
-              I am Aryan, a 6th-semester Computer Engineering student and passionate freelance developer based in India. With a University Rank 1 (9.02 CGPA) and real-world experience, I help forward-thinking brands and startups around the globe build scalable, high-performance digital products.
-            </motion.p>
+    <div className="py-12 md:py-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <Breadcrumb items={[{ label: "About" }]} className="mb-10" />
+
+        <div className="max-w-3xl mb-16">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#0071e3] dark:text-[#2997ff] block mb-3">
+            Founder Story &bull; Gujarat
+          </span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-[var(--foreground)] tracking-[-0.035em] leading-[1.08]">
+            Crafting software for businesses that build Gujarat.
+          </h1>
+          <p className="mt-5 text-base sm:text-lg text-[var(--muted-text)] leading-relaxed prose-readable font-normal">
+            ForbTech was founded to solve a straightforward challenge: local businesses were paying agency retainers for slow, bloated websites that failed to turn Google searches into customers.
+          </p>
+        </div>
+
+        {/* Narrative & Founder Block */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start mb-24">
+          <div className="lg:col-span-7 space-y-6 text-sm sm:text-base text-[var(--foreground)] leading-relaxed font-normal">
+            <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)]">
+              The Purpose
+            </h2>
+            <p className="text-[var(--muted-text)]">
+              In cities like Ahmedabad, Surat, and Gandhinagar, exceptional clinics, farsan shops, gyms, and retail stores have loyal neighborhood foot-traffic. But when new residents or out-of-town buyers search for their services on Google, they are invisible.
+            </p>
+            <p className="text-[var(--muted-text)]">
+              Traditional tech agencies often compound the problem with three common practices:
+            </p>
+            <ul className="space-y-3 pl-2 text-xs sm:text-sm text-[var(--foreground)]">
+              <li className="flex items-start gap-2.5">
+                <span className="text-[var(--muted-text)] font-semibold">01</span>
+                <span>Unpredictable hourly billing with surprise add-on charges.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-[var(--muted-text)] font-semibold">02</span>
+                <span>Sluggish WordPress templates that take 8 seconds to open on mobile networks.</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <span className="text-[var(--muted-text)] font-semibold">03</span>
+                <span>Locking clients into proprietary setups and monthly maintenance retainers.</span>
+              </li>
+            </ul>
+            <p className="text-[var(--muted-text)]">
+              I established ForbTech on an uncompromising standard: <strong>fast, custom-coded websites and Google Maps listings with 100% full ownership handed directly to the client</strong>. No corporate jargon, no sales pressure, and a direct line to the engineer who actually builds your software.
+            </p>
           </div>
 
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            
-            {/* Mission (Large Box) */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="md:col-span-2 bg-foreground/5 border border-foreground/10 rounded-[2rem] p-6 sm:p-8 md:p-12 relative overflow-hidden group hover:border-foreground/30 transition-colors"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <Rocket className="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 mb-4 md:mb-6 text-primary" />
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tight mb-3 md:mb-4">My Mission</h2>
-              <p className="text-sm sm:text-base md:text-xl font-medium opacity-80 leading-relaxed">
-                To bridge the gap between brilliant ideas and flawless execution. Working independently allows me to move fast, write incredibly clean code, and deliver a highly personalized experience for every client I work with.
+          <div className="lg:col-span-5 p-8 rounded-3xl bg-[var(--surface)] border border-[var(--line)] shadow-[0_2px_12px_rgba(0,0,0,0.03)] space-y-6">
+            <div className="flex items-center gap-4 border-b border-[var(--line)] pb-6">
+              <div className="w-12 h-12 rounded-full bg-[var(--foreground)] text-[var(--background)] flex items-center justify-center font-semibold text-lg shrink-0">
+                A
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-[var(--foreground)] tracking-tight">Aryan</h3>
+                <p className="text-xs text-[var(--muted-text)]">Founder &amp; Lead Engineer</p>
+                <p className="text-xs text-[var(--muted-text)] mt-0.5">Gujarat, India</p>
+              </div>
+            </div>
+
+            <div className="space-y-3 text-xs text-[var(--foreground)]">
+              <div className="flex items-start gap-2.5">
+                <Check className="w-3.5 h-3.5 text-[#34c759] shrink-0 mt-0.5" />
+                <span>Direct WhatsApp contact on every active project</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <Check className="w-3.5 h-3.5 text-[#34c759] shrink-0 mt-0.5" />
+                <span>100% client ownership of code, domain, and accounts</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <Check className="w-3.5 h-3.5 text-[#34c759] shrink-0 mt-0.5" />
+                <span>Fixed price quotes defined and agreed upfront</span>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-[var(--line)]">
+              <WhatsAppCTA
+                size="md"
+                label="Chat with Aryan"
+                message="Hi Aryan, I read your story on ForbTech and would like to discuss a project."
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* 4 Core Standards */}
+        <div className="mb-24">
+          <SectionHeader
+            eyebrow="Standards"
+            title="The principles we build by."
+            subhead="Every technical and design decision is measured against these four commitments."
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-6 rounded-3xl bg-[var(--surface)] border border-[var(--line)] shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+              <span className="text-xs font-semibold text-[#0071e3] dark:text-[#2997ff] block mb-2">01</span>
+              <h3 className="text-base font-semibold text-[var(--foreground)] tracking-tight mb-2">
+                100% Ownership
+              </h3>
+              <p className="text-xs text-[var(--muted-text)] leading-relaxed font-normal">
+                Your domain, hosting accounts, and every line of code belong to you. We never lock you in.
               </p>
-            </motion.div>
+            </div>
 
-            {/* Stat 1 */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-primary text-primary-foreground border border-foreground/10 rounded-[2rem] p-6 sm:p-8 md:p-12 flex flex-col justify-between group hover:scale-[1.02] transition-transform text-center md:text-left"
+            <div className="p-6 rounded-3xl bg-[var(--surface)] border border-[var(--line)] shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+              <span className="text-xs font-semibold text-[#0071e3] dark:text-[#2997ff] block mb-2">02</span>
+              <h3 className="text-base font-semibold text-[var(--foreground)] tracking-tight mb-2">
+                4G Speed First
+              </h3>
+              <p className="text-xs text-[var(--muted-text)] leading-relaxed font-normal">
+                Websites engineered to open under 2.0 seconds on standard mobile networks without lag.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-[var(--surface)] border border-[var(--line)] shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+              <span className="text-xs font-semibold text-[#0071e3] dark:text-[#2997ff] block mb-2">03</span>
+              <h3 className="text-base font-semibold text-[var(--foreground)] tracking-tight mb-2">
+                Fixed Estimates
+              </h3>
+              <p className="text-xs text-[var(--muted-text)] leading-relaxed font-normal">
+                Scope is locked before deposit. The price agreed upon is the exact price you pay.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-[var(--surface)] border border-[var(--line)] shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+              <span className="text-xs font-semibold text-[#0071e3] dark:text-[#2997ff] block mb-2">04</span>
+              <h3 className="text-base font-semibold text-[var(--foreground)] tracking-tight mb-2">
+                Clear Communication
+              </h3>
+              <p className="text-xs text-[var(--muted-text)] leading-relaxed font-normal">
+                Zero jargon. Straight answers and progress updates directly on WhatsApp.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Banner */}
+        <div className="rounded-3xl bg-[var(--surface-sunken)] border border-[var(--line)] p-10 text-center max-w-2xl mx-auto shadow-sm">
+          <h2 className="text-2xl font-semibold text-[var(--foreground)] tracking-tight mb-3">
+            Inspect our live track record.
+          </h2>
+          <p className="text-xs sm:text-sm text-[var(--muted-text)] mb-6 font-normal leading-relaxed">
+            Test the 6 live client projects built by ForbTech to verify performance and design quality.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-1 px-5 py-2 rounded-full bg-[var(--foreground)] text-[var(--background)] hover:opacity-90 text-xs font-medium transition-colors shadow-xs"
             >
-              <h3 className="text-sm sm:text-lg md:text-xl font-bold uppercase tracking-widest opacity-80">University Rank</h3>
-              <div className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter mt-4">#1</div>
-            </motion.div>
-
-            {/* Approach 1 */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-foreground/5 border border-foreground/10 rounded-[2rem] p-6 sm:p-8 md:p-12 group hover:border-foreground/30 transition-colors"
-            >
-              <Code className="w-6 h-6 sm:w-8 sm:h-8 mb-3 md:mb-4 text-primary" />
-              <h3 className="text-xl sm:text-2xl font-black uppercase mb-2">Clean Code</h3>
-              <p className="text-sm sm:text-base opacity-70 font-medium leading-relaxed">I build scalable architectures using modern tech stacks like Next.js, React, and Node.</p>
-            </motion.div>
-
-            {/* Approach 2 */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="bg-foreground/5 border border-foreground/10 rounded-[2rem] p-6 sm:p-8 md:p-12 group hover:border-foreground/30 transition-colors"
-            >
-              <Globe className="w-6 h-6 sm:w-8 sm:h-8 mb-3 md:mb-4 text-primary" />
-              <h3 className="text-xl sm:text-2xl font-black uppercase mb-2">Real Experience</h3>
-              <p className="text-sm sm:text-base opacity-70 font-medium leading-relaxed">Internships as a Google Student Ambassador, Frontend & Network Engineer, and IT Support.</p>
-            </motion.div>
-
-            {/* Approach 3 */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="bg-foreground/5 border border-foreground/10 rounded-[2rem] p-6 sm:p-8 md:p-12 group hover:border-foreground/30 transition-colors"
-            >
-              <Cpu className="w-6 h-6 sm:w-8 sm:h-8 mb-3 md:mb-4 text-primary" />
-              <h3 className="text-xl sm:text-2xl font-black uppercase mb-2">Startup Founder</h3>
-              <p className="text-sm sm:text-base opacity-70 font-medium leading-relaxed">Founder of Wispa AI, actively developing a hardware prototype under the Govt. of India SSIP.</p>
-            </motion.div>
-
+              <span>View live projects</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
+            <WhatsAppCTA size="sm" label="Chat with Aryan" />
           </div>
         </div>
       </div>

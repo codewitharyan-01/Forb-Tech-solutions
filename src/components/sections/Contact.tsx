@@ -1,81 +1,81 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue } from "framer-motion"
-import { Button } from "@/components/ui/Button"
-import { ArrowRight, CheckCircle2, User, Mail, Phone, MapPin, Globe } from "lucide-react"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { ArrowRight, CheckCircle2, User, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { siteConfig } from "@/content/siteConfig";
 
 export function Contact() {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect()
-    mouseX.set(clientX - left)
-    mouseY.set(clientY - top)
-  }
-
   return (
-    <section className="py-24 px-4 max-w-5xl mx-auto relative z-10">
-      
+    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto relative z-10">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        onMouseMove={handleMouseMove}
-        className="glass group border border-foreground/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col md:flex-row gap-12"
+        className="rounded-3xl bg-[var(--surface)] border border-[var(--line)] p-8 md:p-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row gap-10"
       >
-        <motion.div
-          className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-          style={{
-            background: useMotionTemplate`
-              radial-gradient(
-                600px circle at ${mouseX}px ${mouseY}px,
-                rgba(6, 182, 212, 0.1),
-                transparent 80%
-              )
-            `,
-          }}
-        />
-
         <div className="flex-1 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tighter mb-2">Ready to Grow Your Business?</h2>
-          <p className="text-sm font-medium text-muted-foreground mb-8">
-            Let’s Build Smart Digital Solutions Together.
+          <span className="text-xs font-medium uppercase tracking-wider text-[var(--muted-text)] block mb-2">
+            Let&apos;s Build Together
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.03em] text-[var(--foreground)] leading-tight mb-3">
+            Ready to grow your business online?
+          </h2>
+          <p className="text-base text-[var(--muted-text)] font-normal leading-relaxed mb-8">
+            Tell us about your project. We deliver fixed scopes, transparent pricing, and 7-day turnaround with zero technical fluff.
           </p>
 
           <div className="flex flex-col gap-3 mb-8">
-            {["Free Consultation", "Custom Quote", "End-to-End Development"].map((item, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <CheckCircle2 strokeWidth={1.2} className="w-4 h-4 opacity-50" />
-                <span className="text-sm font-bold">{item}</span>
+            {["Free Consultation & Technical Blueprint", "Fixed Pricing with Zero Hidden Costs", "100% Client Ownership from Day One"].map((item, i) => (
+              <div key={i} className="flex items-center gap-2.5 text-sm text-[var(--foreground)]">
+                <CheckCircle2 className="w-4 h-4 text-[#0071e3] dark:text-[#2997ff] shrink-0" />
+                <span>{item}</span>
               </div>
             ))}
           </div>
           
-          <Button className="h-14 rounded-full px-8 font-bold shadow-md hover:-translate-y-0.5 transition-transform">
-            Let&apos;s Build Something Amazing <ArrowRight strokeWidth={1.2} className="w-4 h-4 ml-2" />
+          <Button href="/contact" variant="primary" size="lg" icon={<ArrowRight className="w-4 h-4" />}>
+            Request a Free Quote
           </Button>
         </div>
 
-        <div className="flex-1 glass-light dark:glass-dark rounded-[2rem] border border-foreground/10 p-6 flex flex-col gap-4 relative z-10 bg-background/50 backdrop-blur-xl">
-          <div className="flex items-center gap-4 border-b border-foreground/10 pb-4">
-            <div className="w-12 h-12 rounded-full bg-foreground/10 flex items-center justify-center">
-              <User strokeWidth={1.2} className="w-6 h-6 opacity-70" />
+        <div className="flex-1 rounded-2xl bg-[var(--surface-sunken)] border border-[var(--line)] p-6 md:p-8 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-4 border-b border-[var(--line)] pb-5 mb-5">
+              <div className="w-12 h-12 rounded-full bg-[var(--surface)] border border-[var(--line)] flex items-center justify-center">
+                <User className="w-5 h-5 text-[var(--foreground)]" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-base text-[var(--foreground)]">{siteConfig.founderName}</h4>
+                <p className="text-xs text-[var(--muted-text)] uppercase tracking-wider mt-0.5">Founder &amp; Lead Engineer</p>
+              </div>
             </div>
-            <div>
-              <h4 className="font-bold">Aryan Patel</h4>
-              <p className="text-xs text-muted-foreground uppercase tracking-widest mt-0.5">Founder & Owner, FORBTECH</p>
+
+            <div className="flex flex-col gap-3 text-sm">
+              <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-3 text-[var(--foreground)] hover:text-[#0071e3] dark:hover:text-[#2997ff] transition-colors">
+                <Phone className="w-4 h-4 text-[var(--muted-text)] shrink-0" />
+                <span>{siteConfig.phoneDisplay}</span>
+              </a>
+              <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-3 text-[var(--foreground)] hover:text-[#0071e3] dark:hover:text-[#2997ff] transition-colors">
+                <Mail className="w-4 h-4 text-[var(--muted-text)] shrink-0" />
+                <span>{siteConfig.email}</span>
+              </a>
+              <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-[var(--foreground)] hover:text-[#0071e3] dark:hover:text-[#2997ff] transition-colors">
+                <MessageCircle className="w-4 h-4 text-[var(--muted-text)] shrink-0" />
+                <span>WhatsApp ({siteConfig.phoneDisplay})</span>
+              </a>
+              <div className="flex items-center gap-3 text-[var(--muted-text)] pt-1">
+                <MapPin className="w-4 h-4 text-[var(--muted-text)] shrink-0" />
+                <span>{siteConfig.addressRegion}, {siteConfig.addressCountry}</span>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3 pt-2">
-             <a href="tel:+919023668571" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Phone strokeWidth={1.2} className="w-4 h-4 opacity-50" /> +91 9023668571</a>
-             <a href="mailto:forbteck@gmail.com" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Mail strokeWidth={1.2} className="w-4 h-4 opacity-50" /> forbteck@gmail.com</a>
-             <a href="https://forbtech.varcel.app" className="flex items-center gap-3 text-sm font-semibold hover:text-muted-foreground transition-colors"><Globe strokeWidth={1.2} className="w-4 h-4 opacity-50" /> forbtech.varcel.app</a>
-             <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground"><MapPin strokeWidth={1.2} className="w-4 h-4 opacity-50" /> Ahmedabad, Gujarat, India</div>
+
+          <div className="pt-6 mt-6 border-t border-[var(--line)] text-xs text-[var(--muted-text)]">
+            <span>Operating hours: 9:00 AM – 8:00 PM IST (Mon–Sat)</span>
           </div>
         </div>
       </motion.div>
-
     </section>
-  )
+  );
 }
